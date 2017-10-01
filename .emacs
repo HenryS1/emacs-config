@@ -6,17 +6,41 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
-   ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
+   ["#282c34" "#ff6c6b" "#98be65" "#da8548" "#61afef" "#c678dd" "#1f5582" "#abb2bf"])
  '(custom-enabled-themes (quote (zerodark)))
  '(custom-safe-themes
    (quote
-    ("dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default))))
+    ("237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default)))
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-type (quote stack-ghci))
+ '(haskell-tags-on-save t)
+ '(package-selected-packages
+   (quote
+    (demo-it iedit company company-ghc scala-mode sbt-mode ensime idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;; the package manager
+(require 'package)
+(setq
+ package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                    ("org" . "http://orgmode.org/elpa/")
+                    ("melpa" . "http://melpa.org/packages/")
+                    ("melpa-stable" . "http://stable.melpa.org/packages/")))
+(package-initialize)
+(package-install 'use-package)
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+  
+
+(require 'use-package)
 
 (setq
  inhibit-startup-screen t
@@ -40,28 +64,8 @@
 ;; global keybindings
 (global-unset-key (kbd "C-z"))
 
-;; cedent/semantic
-(add-to-list 'load-path "~/wip/elisp/semantic-refactor/cedet/cedet")
-(load-file "~/wip/elisp/semantic-refactor/cedet/cedet/cedet-devel-load.el")
-(semantic-load-enable-minimum-features)
-
 ;; cl mode is needed by various pacakges and needs to be required to avoid weird bugs
 (require 'cl)
-
-;; the package manager
-(require 'package)
-(setq
- package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                    ("org" . "http://orgmode.org/elpa/")
-                    ("melpa" . "http://melpa.org/packages/")
-                    ("melpa-stable" . "http://stable.melpa.org/packages/")))
-
-(package-initialize)
-(when (not package-archive-contents)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(require 'use-package)
 
 (use-package flycheck :demand :ensure t)
 
@@ -73,7 +77,7 @@
 
 ;; ido
 (use-package ido :demand :ensure t)
-(use-package ido-ubiquitous :demand :ensure t)
+(use-package ido-completing-read+ :demand :ensure t)
 (use-package flx-ido :demand :ensure t)
 (ido-mode t)
 
@@ -101,7 +105,7 @@
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 
 ;; disable bars
-(menu-bar-mode -1)
+(menu-bar-mode 1)
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
 
@@ -125,19 +129,21 @@
 (set-face-attribute 'default nil :font "hack")
 
 ;; magit
-(use-package magit :demand :ensure t)
+(use-package magit 
+  :demand 
+  :ensure t)
 
-;; ocaml
-;;(use-package flycheck-ocaml :demand :ensure t)
-(setq opam-share (substring (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
-(add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
-(use-package merlin :demand :ensure t)
-(add-hook 'tuareg-mode-hook 'merlin-mode)
-(add-hook 'caml-mode-hook 'merlin-mode)
+;; ;; ocaml
+;; ;;(use-package flycheck-ocaml :demand :ensure t)
+;; (setq opam-share (substring (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
+;; (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
+;; (use-package merlin :demand :ensure t)
+;; (add-hook 'tuareg-mode-hook 'merlin-mode)
+;; (add-hook 'caml-mode-hook 'merlin-mode)
 
 ;; idris
 (use-package idris-mode :demand :ensure t)
-(setq idris-interpreter-path "/home/henry/.cabal/bin//idris")
+(setq idris-interpreter-path "/usr/local/bin/idris")
 (setq idris-semantic-source-highlighting t)
 
 
@@ -178,11 +184,7 @@
 (let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
   (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
   (add-to-list 'exec-path my-cabal-path))
-(custom-set-variables '(haskell-tags-on-save t))
-(custom-set-variables
-  '(haskell-process-suggest-remove-import-lines t)
-  '(haskell-process-auto-import-loaded-modules t)
-  '(haskell-process-log t))
+
 (eval-after-load 'haskell-mode '(progn
   (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
   (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
@@ -195,8 +197,7 @@
   (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
   (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
   (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)))
-(custom-set-variables '(haskell-process-type 'cabal-repl))
-(custom-set-variables '(haskell-process-type 'stack-ghci))
+
 (eval-after-load 'haskell-mode
   '(define-key haskell-mode-map (kbd "C-c C-o") 'haskell-compile))
 (eval-after-load 'haskell-cabal
@@ -207,7 +208,7 @@
 (let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
   (setenv "PATH" (concat my-cabal-path ";" (getenv "PATH")))
   (add-to-list 'exec-path my-cabal-path))
-(custom-set-variables '(haskell-tags-on-save t))
+
 (add-to-list 'load-path "~/.cabal/share/x86_64-linux-ghc-8.0.1/ghc-mod-5.8.0.0")
 (autoload 'ghc-init "ghc" nil t)
 (autoload 'ghc-debug "ghc" nil t)
@@ -224,6 +225,11 @@
 
 ;; i-edit
 (use-package iedit
+  :ensure t
+  :demand t)
+
+;; demo-it
+(use-package demo-it
   :ensure t
   :demand t)
 
