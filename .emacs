@@ -18,7 +18,7 @@
  '(haskell-tags-on-save t)
  '(package-selected-packages
    (quote
-    (demo-it iedit company company-ghc scala-mode sbt-mode ensime idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))))
+    (cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -34,13 +34,24 @@
                     ("melpa" . "http://melpa.org/packages/")
                     ("melpa-stable" . "http://stable.melpa.org/packages/")))
 (package-initialize)
+
+
 (package-install 'use-package)
+
 
 (when (not package-archive-contents)
   (package-refresh-contents))
   
 
 (require 'use-package)
+
+(use-package exec-path-from-shell
+  :demand t
+  :ensure t)
+
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 
 (setq
  inhibit-startup-screen t
@@ -67,7 +78,11 @@
 ;; cl mode is needed by various pacakges and needs to be required to avoid weird bugs
 (require 'cl)
 
+;; flycheck
 (use-package flycheck :demand :ensure t)
+(use-package flycheck-cask
+  :commands flycheck-cask-setup
+  :config (add-hook 'emacs-lisp-mode-hook (flycheck-cask-setup)))
 
 (use-package helm :demand :ensure t)
 (use-package projectile :demand :ensure t)
@@ -133,6 +148,46 @@
   :demand 
   :ensure t)
 
+;; YASnippet
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :commands yas-minor-mode
+  :config (yas-reload-all))
+
+(use-package yatemplate
+  :defer 2 ;; WORKAROUND https://github.com/mineo/yatemplate/issues/3
+  :config
+  (auto-insert-mode)
+  (setq auto-insert-alist nil)
+  (yatemplate-fill-alist))
+
+;;smart parens
+(use-package smartparens
+  :diminish smartparens-mode
+  :commands
+  smartparens-strict-mode
+  smartparens-mode
+  sp-restrict-to-pairs-interactive
+  sp-local-pair
+  :init
+  (setq sp-interactive-dwim t)
+  :config
+  (require 'smartparens-config)
+  (sp-use-smartparens-bindings)
+
+  (sp-pair "(" ")" :wrap "C-(") ;; how do people live without this?
+  (sp-pair "[" "]" :wrap "s-[") ;; C-[ sends ESC
+  (sp-pair "{" "}" :wrap "C-{")
+
+  ;; WORKAROUND https://github.com/Fuco1/smartparens/issues/543
+  (bind-key "C-<left>" nil smartparens-mode-map)
+  (bind-key "C-<right>" nil smartparens-mode-map)
+
+  (bind-key "s-<delete>" 'sp-kill-sexp smartparens-mode-map)
+  (bind-key "s-<backspace>" 'sp-backward-kill-sexp smartparens-mode-map))
+
+
+
 ;; ;; ocaml
 ;; ;;(use-package flycheck-ocaml :demand :ensure t)
 ;; (setq opam-share (substring (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
@@ -145,7 +200,8 @@
 (use-package idris-mode :demand :ensure t)
 (setq idris-interpreter-path "/usr/local/bin/idris")
 (setq idris-semantic-source-highlighting t)
-
+(add-to-list 'completion-ignored-extensions ".ibc")
+(setq ido-ignore-extensions t)
 
 ;; ansi colours
 (require 'ansi-color)
@@ -159,7 +215,7 @@
 (add-hook 'eshell-preoutput-filter-functions 'ansi-color-apply)
 
 ;; scala
-(use-package ensime :ensure t :pin melpa)
+(use-package ensime :ensure t :pin melpa-stable)
 (use-package sbt-mode :ensure t :pin melpa)
 (use-package scala-mode :ensure t :pin melpa)
 
@@ -178,7 +234,6 @@
 (projectile-mode 1)
 
 ;; haskell 
-(add-hook 'haskell-mode-hook #'hindent-mode)
 (eval-after-load 'haskell-mode
           '(define-key haskell-mode-map [f8] 'haskell-navigate-imports))
 (let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
@@ -232,6 +287,35 @@
 (use-package demo-it
   :ensure t
   :demand t)
+
+;; org-mode
+(setq org-src-tab-acts-natively t)
+(setq org-src-fontify-natively t)
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (org . t)
+   (sh . t)))
+
+;; imenu
+(use-package popup-imenu
+  :commands popup-imenu
+  :bind ("M-i" . popup-imenu))
+
+;; clojure
+(use-package cider
+  :ensure t
+  :demand t)
+
+;; magit
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+
+;;rest client
+(use-package rest-client
+  :ensure
+  :demand t)
+
 
 (provide '.emacs) 
 ;;; .emacs ends here
