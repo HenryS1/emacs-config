@@ -18,7 +18,7 @@
  '(haskell-tags-on-save t)
  '(package-selected-packages
    (quote
-    (cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))))
+    (restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -312,7 +312,7 @@
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 
 ;;rest client
-(use-package rest-client
+(use-package restclient
   :ensure
   :demand t)
 
