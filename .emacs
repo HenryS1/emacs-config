@@ -18,7 +18,7 @@
  '(haskell-tags-on-save t)
  '(package-selected-packages
    (quote
-    (restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))))
+    (nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -118,6 +118,11 @@
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+
+;; sml mode
+(use-package sml-mode
+  :demand
+  :ensure t)
 
 ;; disable bars
 (menu-bar-mode 1)
@@ -316,6 +321,21 @@
   :ensure
   :demand t)
 
+;; yaml
+(use-package yaml-mode
+  :ensure
+  :demand t)
+
+;;nand2tetris
+(use-package nand2tetris
+  :ensure 
+  :demand t)
+
+(use-package nand2tetris-assembler
+  :ensure
+  :demand t)
+
+(add-to-list 'auto-mode-alist '("\\.hdl" . nand2tetris-mode))
 
 (provide '.emacs) 
 ;;; .emacs ends here
