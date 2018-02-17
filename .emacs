@@ -18,7 +18,7 @@
  '(haskell-tags-on-save t)
  '(package-selected-packages
    (quote
-    (nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))))
+    (eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -118,6 +118,7 @@
 (add-hook 'lisp-mode-hook             #'enable-paredit-mode)
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
+(add-hook 'clojure-mode-hook #'enable-paredit-mode)
 
 ;; sml mode
 (use-package sml-mode
@@ -336,6 +337,12 @@
   :demand t)
 
 (add-to-list 'auto-mode-alist '("\\.hdl" . nand2tetris-mode))
+
+;; eros evaluation overlays
+(use-package eros
+  :ensure
+  :demand t)
+(eros-mode 1)
 
 (provide '.emacs) 
 ;;; .emacs ends here
