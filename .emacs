@@ -18,7 +18,7 @@
  '(haskell-tags-on-save t)
  '(package-selected-packages
    (quote
-    (eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))))
+    (opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode rust-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -84,11 +84,29 @@
   :commands flycheck-cask-setup
   :config (add-hook 'emacs-lisp-mode-hook (flycheck-cask-setup)))
 
+;; helm
 (use-package helm :demand :ensure t)
 (use-package projectile :demand :ensure t)
 (use-package flx :demand :ensure t)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(setq projectile-use-git-grep 1)
+(helm-mode 1)
 
 (use-package helm-projectile :demand :ensure t)
+(helm-projectile-on)
+
+;; c++
+(use-package irony :demand :ensure t)
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
+;; (use-package flycheck-irony :demand :ensure t)
+;; (add-hook 'c++-mode-hook 'irony-mode)
+
+;; (setq irony-additional-clang-options '("-std=c++11"))
+
+;; opencl
+(use-package opencl-mode :demand :ensure t)
+(add-to-list 'auto-mode-alist '("\\.cl" . opencl-mode))
 
 ;; ido
 (use-package ido :demand :ensure t)
@@ -107,7 +125,7 @@
 ;; slime
 (use-package slime :demand :ensure t)
 (setq inferior-lisp-program "/usr/local/bin/sbcl --no-debugger")
-(setq slime-contribs '(slime-fancy))
+(setq slime-contribs '(slime-fancy slime-asdf))
 
 ;; paredit
 (use-package paredit :demand :ensure t)
@@ -240,40 +258,10 @@
 (projectile-mode 1)
 
 ;; haskell 
-(eval-after-load 'haskell-mode
-          '(define-key haskell-mode-map [f8] 'haskell-navigate-imports))
-(let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
-  (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
-  (add-to-list 'exec-path my-cabal-path))
-
-(eval-after-load 'haskell-mode '(progn
-  (define-key haskell-mode-map (kbd "C-c C-l") 'haskell-process-load-or-reload)
-  (define-key haskell-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-  (define-key haskell-mode-map (kbd "C-c C-n C-t") 'haskell-process-do-type)
-  (define-key haskell-mode-map (kbd "C-c C-n C-i") 'haskell-process-do-info)
-  (define-key haskell-mode-map (kbd "C-c C-n C-c") 'haskell-process-cabal-build)
-  (define-key haskell-mode-map (kbd "C-c C-n c") 'haskell-process-cabal)))
-(eval-after-load 'haskell-cabal '(progn
-  (define-key haskell-cabal-mode-map (kbd "C-c C-z") 'haskell-interactive-switch)
-  (define-key haskell-cabal-mode-map (kbd "C-c C-k") 'haskell-interactive-mode-clear)
-  (define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-process-cabal-build)
-  (define-key haskell-cabal-mode-map (kbd "C-c c") 'haskell-process-cabal)))
-
-(eval-after-load 'haskell-mode
-  '(define-key haskell-mode-map (kbd "C-c C-o") 'haskell-compile))
-(eval-after-load 'haskell-cabal
-  '(define-key haskell-cabal-mode-map (kbd "C-c C-o") 'haskell-compile))
-(let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
-  (setenv "PATH" (concat my-cabal-path ":" (getenv "PATH")))
-  (add-to-list 'exec-path my-cabal-path))
-(let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
-  (setenv "PATH" (concat my-cabal-path ";" (getenv "PATH")))
-  (add-to-list 'exec-path my-cabal-path))
-
-(add-to-list 'load-path "~/.cabal/share/x86_64-linux-ghc-8.0.1/ghc-mod-5.8.0.0")
-(autoload 'ghc-init "ghc" nil t)
-(autoload 'ghc-debug "ghc" nil t)
-(add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+(use-package intero
+  :ensure t
+  :demand)
+(add-hook 'haskell-mode-hook 'intero-mode)
 (use-package company-ghc :ensure t)
 
 ;; company mode
@@ -294,15 +282,6 @@
   :ensure t
   :demand t)
 
-;; org-mode
-(setq org-src-tab-acts-natively t)
-(setq org-src-fontify-natively t)
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((emacs-lisp . t)
-   (org . t)
-   (sh . t)))
-
 ;; imenu
 (use-package popup-imenu
   :commands popup-imenu
@@ -314,6 +293,7 @@
   :demand t)
 
 ;; magit
+(setq clojure-enable-paredit t)
 (global-set-key (kbd "C-x g") 'magit-status)
 (global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
 
@@ -338,12 +318,55 @@
 
 (add-to-list 'auto-mode-alist '("\\.hdl" . nand2tetris-mode))
 
+;; prolog
+(add-to-list 'auto-mode-alist '("\\.prlg" . prolog-mode))
+
+;; sass mode
+(use-package sass-mode
+  :ensure
+  :demand t)
+
 ;; eros evaluation overlays
 (use-package eros
   :ensure
   :demand t)
 (eros-mode 1)
 
+;; org-reveal
+(use-package ox-reveal
+  :ensure
+  :demand t)
+(setq org-reveal-root "file:///Users/henrysteere/reveal.js/")
+(setq org-export-time-stamp-file nil)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((lisp . t)))
+
+;; htmlize
+(use-package htmlize
+  :ensure
+  :demand t)
+
+;; rust
+(use-package rust-mode
+  :ensure
+  :demand t)
+
+;; git time machine
+(use-package git-timemachine
+  :ensure
+  :demand t)
+
+;; proof general
+;; Open .v files with Proof General's Coq mode
+(load "~/.emacs.d/lisp/PG/generic/proof-site")
+(use-package company-coq
+  :ensure 
+  :demand t)
+
 (provide '.emacs) 
 ;;; .emacs ends here
 
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
