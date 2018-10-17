@@ -7,18 +7,44 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#282c34" "#ff6c6b" "#98be65" "#da8548" "#61afef" "#c678dd" "#1f5582" "#abb2bf"])
- '(custom-enabled-themes (quote (zerodark)))
+ '(custom-enabled-themes (quote (doom-challenger-deep)))
  '(custom-safe-themes
    (quote
-    ("237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default)))
+    ("d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default)))
+ '(fci-rule-color "#4C566A")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
  '(haskell-process-type (quote stack-ghci))
  '(haskell-tags-on-save t)
+ '(jdee-db-active-breakpoint-face-colors (cons "#191C25" "#80A0C2"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#191C25" "#A2BF8A"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#191C25" "#434C5E"))
  '(package-selected-packages
    (quote
-    (opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode rust-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))))
+    (doom-modeline js2-mode doom-themes realgud opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode rust-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode)))
+ '(vc-annotate-background "#3B4252")
+ '(vc-annotate-color-map
+   (list
+    (cons 20 "#A2BF8A")
+    (cons 40 "#bac389")
+    (cons 60 "#d3c788")
+    (cons 80 "#ECCC87")
+    (cons 100 "#e3b57e")
+    (cons 120 "#da9e75")
+    (cons 140 "#D2876D")
+    (cons 160 "#c88982")
+    (cons 180 "#be8b98")
+    (cons 200 "#B58DAE")
+    (cons 220 "#b97e97")
+    (cons 240 "#bd6f80")
+    (cons 260 "#C16069")
+    (cons 280 "#a15b66")
+    (cons 300 "#825663")
+    (cons 320 "#625160")
+    (cons 340 "#4C566A")
+    (cons 360 "#4C566A")))
+ '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -41,7 +67,7 @@
 
 (when (not package-archive-contents)
   (package-refresh-contents))
-  
+
 
 (require 'use-package)
 
@@ -83,6 +109,10 @@
 (use-package flycheck-cask
   :commands flycheck-cask-setup
   :config (add-hook 'emacs-lisp-mode-hook (flycheck-cask-setup)))
+(add-to-list 'flycheck-clang-include-path "/usr/local/include/gtest/")
+
+;; real gud
+(use-package realgud :demand :ensure t)
 
 ;; helm
 (use-package helm :demand :ensure t)
@@ -148,7 +178,7 @@
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
 
-;; cuda 
+;; cuda
 (use-package cuda-mode :demand :ensure t)
 (flycheck-define-checker cuda-mode-checker
   "Checks cuda files based on nvcc compiler output"
@@ -158,8 +188,27 @@
 (global-flycheck-mode)
 
 ;; zero dark mode line
-(use-package zerodark-theme :demand :ensure t)
-(zerodark-setup-modeline-format)
+;;(use-package zerodark-theme :demand :ensure t)
+;;(zerodark-setup-modeline-format)
+
+;; doom theme
+(use-package doom-themes :demand :ensure t)
+()
+;; Global settings (defaults)
+(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+      doom-themes-enable-italic t) ; if nil, italics is universally disabled
+
+;; Enable flashing mode-line on errors
+(doom-themes-visual-bell-config)
+
+;; Enable custom neotree theme
+(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
+
+(use-package doom-modeline
+  :ensure t
+  :demand)
+
+(doom-modeline-init)
 
 ;; all the icons
 (use-package all-the-icons :demand :ensure t)
@@ -168,8 +217,8 @@
 (set-face-attribute 'default nil :font "hack")
 
 ;; magit
-(use-package magit 
-  :demand 
+(use-package magit
+  :demand
   :ensure t)
 
 ;; YASnippet
@@ -243,7 +292,7 @@
 (use-package sbt-mode :ensure t :pin melpa)
 (use-package scala-mode :ensure t :pin melpa)
 
-;; sbt 
+;; sbt
 (use-package sbt-mode
   :commands sbt-start sbt-command
   :config
@@ -257,7 +306,7 @@
 ;; projectile
 (projectile-mode 1)
 
-;; haskell 
+;; haskell
 (use-package intero
   :ensure t
   :demand)
@@ -309,7 +358,7 @@
 
 ;;nand2tetris
 (use-package nand2tetris
-  :ensure 
+  :ensure
   :demand t)
 
 (use-package nand2tetris-assembler
@@ -362,10 +411,27 @@
 ;; Open .v files with Proof General's Coq mode
 (load "~/.emacs.d/lisp/PG/generic/proof-site")
 (use-package company-coq
-  :ensure 
+  :ensure
   :demand t)
 
-(provide '.emacs) 
+;; some handy utilities
+(defun hs-region-length ()
+  "Find the length of the selected region."
+  (interactive)
+  (message (format "%d" (- (region-end) (region-beginning)))))
+(global-set-key (kbd "C-c l") 'hs-region-length)
+
+;; javascript
+(use-package js2-mode
+  :ensure
+  :demand t)
+(add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
+
+;; highlight bot replays
+(load "~/.emacs.d/lisp/highlight-console-replays.el")
+(require 'highlight-console-replays)
+
+(provide '.emacs)
 ;;; .emacs ends here
 
 (put 'downcase-region 'disabled nil)
