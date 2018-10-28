@@ -7,22 +7,20 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#282c34" "#ff6c6b" "#98be65" "#da8548" "#61afef" "#c678dd" "#1f5582" "#abb2bf"])
- '(custom-enabled-themes (quote (doom-challenger-deep)))
+ '(custom-enabled-themes '(doom-challenger-deep))
  '(custom-safe-themes
-   (quote
-    ("d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default)))
+   '("75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default))
  '(fci-rule-color "#4C566A")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
- '(haskell-process-type (quote stack-ghci))
+ '(haskell-process-type 'stack-ghci)
  '(haskell-tags-on-save t)
  '(jdee-db-active-breakpoint-face-colors (cons "#191C25" "#80A0C2"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#191C25" "#A2BF8A"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#191C25" "#434C5E"))
  '(package-selected-packages
-   (quote
-    (doom-modeline js2-mode doom-themes realgud opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode rust-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode)))
+   '(slime doom-modeline js2-mode doom-themes realgud opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode rust-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))
  '(vc-annotate-background "#3B4252")
  '(vc-annotate-color-map
    (list
@@ -58,8 +56,8 @@
  package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                     ("org" . "http://orgmode.org/elpa/")
                     ("melpa" . "http://melpa.org/packages/")
-                    ("melpa-stable" . "http://stable.melpa.org/packages/")))
-(package-initialize)
+;;                    ("melpa-stable" . "http://stable.melpa.org/packages/")
+                    ))
 
 
 (package-install 'use-package)
@@ -104,6 +102,9 @@
 ;; cl mode is needed by various pacakges and needs to be required to avoid weird bugs
 (require 'cl)
 
+;; shell prompt issue
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
 ;; flycheck
 (use-package flycheck :demand :ensure t)
 (use-package flycheck-cask
@@ -128,7 +129,7 @@
 
 ;; c++
 (use-package irony :demand :ensure t)
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
+(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++17")))
 ;; (use-package flycheck-irony :demand :ensure t)
 ;; (add-hook 'c++-mode-hook 'irony-mode)
 
@@ -156,6 +157,7 @@
 (use-package slime :demand :ensure t)
 (setq inferior-lisp-program "/usr/local/bin/sbcl --no-debugger")
 (setq slime-contribs '(slime-fancy slime-asdf))
+
 
 ;; paredit
 (use-package paredit :demand :ensure t)
@@ -187,13 +189,9 @@
   :modes (cuda-mode))
 (global-flycheck-mode)
 
-;; zero dark mode line
-;;(use-package zerodark-theme :demand :ensure t)
-;;(zerodark-setup-modeline-format)
-
 ;; doom theme
 (use-package doom-themes :demand :ensure t)
-()
+
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
@@ -234,6 +232,8 @@
   (setq auto-insert-alist nil)
   (yatemplate-fill-alist))
 
+(defvar sp-interactive-dwim)
+
 ;;smart parens
 (use-package smartparens
   :diminish smartparens-mode
@@ -259,8 +259,6 @@
   (bind-key "s-<delete>" 'sp-kill-sexp smartparens-mode-map)
   (bind-key "s-<backspace>" 'sp-backward-kill-sexp smartparens-mode-map))
 
-
-
 ;; ;; ocaml
 ;; ;;(use-package flycheck-ocaml :demand :ensure t)
 ;; (setq opam-share (substring (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
@@ -279,18 +277,18 @@
 ;; ansi colours
 (require 'ansi-color)
 (defun colorize-compilation-buffer ()
-  (toggle-read-only)
+  (read-only-mode)
   (ansi-color-apply-on-region (point-min) (point-max))
-  (toggle-read-only))
+  (read-only-mode))
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 (add-hook 'eshell-preoutput-filter-functions 'ansi-color-apply)
 
 ;; scala
-(use-package ensime :ensure t :pin melpa-stable)
-(use-package sbt-mode :ensure t :pin melpa)
-(use-package scala-mode :ensure t :pin melpa)
+(use-package ensime :ensure t)
+(use-package sbt-mode :ensure t)
+(use-package scala-mode :ensure t)
 
 ;; sbt
 (use-package sbt-mode
@@ -409,7 +407,9 @@
 
 ;; proof general
 ;; Open .v files with Proof General's Coq mode
-(load "~/.emacs.d/lisp/PG/generic/proof-site")
+(use-package proof-general
+  :ensure
+  :demand t)
 (use-package company-coq
   :ensure
   :demand t)
@@ -427,9 +427,12 @@
   :demand t)
 (add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
 
+(set-frame-parameter nil 'fullscreen 'fullboth)
+
 ;; highlight bot replays
-(load "~/.emacs.d/lisp/highlight-console-replays.el")
-(require 'highlight-console-replays)
+(when (file-exists-p "~/.emacs.d/lisp/highlight-console-replays.el")
+  (load "~/.emacs.d/lisp/highlight-console-replays.el")
+  (require 'highlight-console-replays))
 
 (provide '.emacs)
 ;;; .emacs ends here
