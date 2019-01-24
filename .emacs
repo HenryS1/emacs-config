@@ -7,9 +7,10 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#282c34" "#ff6c6b" "#98be65" "#da8548" "#61afef" "#c678dd" "#1f5582" "#abb2bf"])
- '(custom-enabled-themes '(doom-challenger-deep))
+ '(custom-enabled-themes (quote (doom-vibrant)))
  '(custom-safe-themes
-   '("75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default))
+   (quote
+    ("75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default)))
  '(fci-rule-color "#4C566A")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
@@ -20,7 +21,8 @@
  '(jdee-db-requested-breakpoint-face-colors (cons "#191C25" "#A2BF8A"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#191C25" "#434C5E"))
  '(package-selected-packages
-   '(slime doom-modeline js2-mode doom-themes realgud opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode rust-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))
+   (quote
+    (helm-pydoc pydoc python-mode poly-R polymode poly-mode ess-smart-underscore org-ref ess evil ccls lsp-ui company-lsp lsp-mod doom-modeline js2-mode doom-themes realgud opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode rust-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode)))
  '(vc-annotate-background "#3B4252")
  '(vc-annotate-color-map
    (list
@@ -137,7 +139,7 @@
 
 ;; opencl
 (use-package opencl-mode :demand :ensure t)
-(add-to-list 'auto-mode-alist '("\\.cl" . opencl-mode))
+(add-to-list 'auto-mode-alist '("\\.cl$" . opencl-mode))
 
 ;; ido
 (use-package ido :demand :ensure t)
@@ -191,7 +193,6 @@
 
 ;; doom theme
 (use-package doom-themes :demand :ensure t)
-
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
@@ -414,6 +415,9 @@
   :ensure
   :demand t)
 
+;; git grep shortcut
+(global-set-key (kbd "C-c u") 'vc-git-grep)
+
 ;; some handy utilities
 (defun hs-region-length ()
   "Find the length of the selected region."
@@ -433,6 +437,45 @@
 (when (file-exists-p "~/.emacs.d/lisp/highlight-console-replays.el")
   (load "~/.emacs.d/lisp/highlight-console-replays.el")
   (require 'highlight-console-replays))
+
+;; R lang
+(use-package ess
+  :ensure
+  :demand t)
+
+(use-package ess-smart-underscore
+  :ensure
+  :demand t)
+
+;; Multiple major modes (used by R)
+(use-package polymode
+  :ensure
+  :demand t)
+
+(use-package poly-R
+  :ensure
+  :demand t)
+(add-to-list 'auto-mode-alist '("\\.md" . poly-r-mode))
+
+(use-package poly-markdown
+  :ensure
+  :demand t)
+(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+
+;; Python
+(use-package pydoc
+  :ensure
+  :demand t)
+
+(use-package helm-pydoc
+  :ensure
+  :demand t)
+
+(with-eval-after-load "python"
+  (define-key python-mode-map (kbd "C-c C-d") 'helm-pydoc))
+
+(setq python-shell-interpreter "/usr/local/bin/python3")
+
 
 (provide '.emacs)
 ;;; .emacs ends here
