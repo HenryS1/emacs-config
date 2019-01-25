@@ -476,9 +476,8 @@
 
 (setq python-shell-interpreter "/usr/local/bin/python3")
 
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
 
 (provide '.emacs)
 ;;; .emacs ends here
-
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
