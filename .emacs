@@ -1,4 +1,3 @@
-
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -589,22 +588,48 @@
 (defun select-page ()
   "Add current page to list of selected pages."
   (interactive)
-  (add-to-list 'selected-pages (pdf-view-current-page) t))
+  (add-to-list 'selected-pages (cons (buffer-file-name) (pdf-view-current-page)) t))
+
+(defun compare-pdf-pages (one other)
+  "ONE is less than OTHER if it's filename is lexicographically less than or it page is less."
+  (or (string< (car one) (car other))
+      (and (string= (car one) (car other))
+           (< (cdr one) (cdr other)))))
+
+(defun prepare-pdf-pages (pages)
+  "Groups PAGES by filename and orders them by page number."
+  (loop with sorted = (sort pages #'compare-pdf-pages)
+     with current-pages = nil
+     with current-file = nil
+     with result = (list)
+     for page in sorted
+     when (null current-file)
+     do (setf current-file (car page))
+     when (not (string= current-file (car page)))
+     do (push (cons current-file (reverse current-pages)) result)
+       (setf current-file (car page))
+       (setf current-pages nil)
+     do (push (cdr page) current-pages)
+     finally (progn (push (cons current-file (reverse current-pages)) result)
+                    (return result))))
+
+(defun format-file-selection (file-selection)
+  "Formats FILE-SELECTION for pdfjam."
+  (list (car file-selection) (mapconcat #'number-to-string
+                                        (cdr file-selection)
+                                        ",")))
 
 (defun extract-selected-pages (file)
   "Save selected pages to FILE."
   (interactive "FSave as: ")
-  (setq selected-pages (sort selected-pages #'<))
-  (start-process "pdfjam" "*pdfjam*"
+  (setq selected-pages (sort selected-pages #'compare-pdf-pages))
+  (apply #'start-process "pdfjam" "*pdfjam*"
                  "pdfjam"
-                 (buffer-file-name)
-                 (mapconcat #'number-to-string
-                            selected-pages
-                            ",")
-                 "-o"
-                 (expand-file-name file))
-  (find-file (expand-file-name file))
-  (setq selected-pages (list)))
+                 (append (apply #'append (mapcar #'format-file-selection
+                                  (prepare-pdf-pages selected-pages)))
+                         (list "-o"
+                               (expand-file-name file))))
+  (setf selected-pages (list)))
 
 (define-key pdf-view-mode-map "S" #'select-page)
 
