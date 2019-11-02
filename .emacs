@@ -1,3 +1,10 @@
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -15,14 +22,15 @@
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
- '(haskell-process-type 'stack-ghci)
+ '(haskell-process-type (quote stack-ghci))
  '(haskell-tags-on-save t)
  '(jdee-db-active-breakpoint-face-colors (cons "#191C25" "#80A0C2"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#191C25" "#A2BF8A"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#191C25" "#434C5E"))
  '(package-selected-packages
    (quote
-    (helm-pydoc pydoc python-mode poly-R polymode poly-mode ess-smart-underscore org-ref ess evil ccls lsp-ui company-lsp lsp-mod doom-modeline js2-mode doom-themes realgud opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode rust-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode)))
+    (exotica-theme exotica ein w3 graphviz-dot-mode pdfgrep kotlin-mode pdf-tools hy-mode python-pytest pipenv proof-general helm-pydoc pydoc python-mode poly-R polymode poly-mode ess-smart-underscore org-ref ess evil ccls lsp-ui company-lsp lsp-mod doom-modeline js2-mode doom-themes realgud opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode rust-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode)))
+ '(polymode-exporter-output-file-format "%sexported")
  '(vc-annotate-background "#3B4252")
  '(vc-annotate-color-map
    (list
@@ -113,6 +121,7 @@
   :commands flycheck-cask-setup
   :config (add-hook 'emacs-lisp-mode-hook (flycheck-cask-setup)))
 (add-to-list 'flycheck-clang-include-path "/usr/local/include/gtest/")
+(global-flycheck-mode)
 
 ;; real gud
 (use-package realgud :demand :ensure t)
@@ -132,6 +141,7 @@
 ;; c++
 (use-package irony :demand :ensure t)
 (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++17")))
+(add-to-list 'auto-mode-alist '("\\.tpp$" . c++-mode))
 ;; (use-package flycheck-irony :demand :ensure t)
 ;; (add-hook 'c++-mode-hook 'irony-mode)
 
@@ -171,6 +181,7 @@
 (add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 (add-hook 'clojure-mode-hook #'enable-paredit-mode)
+(add-hook 'hy-mode-hook #'enable-paredit-mode)
 
 ;; sml mode
 (use-package sml-mode
@@ -189,10 +200,14 @@
   :command ("make")
   :error-patterns ((error line-start (file-name) "(" line "): " (message) line-end))
   :modes (cuda-mode))
-(global-flycheck-mode)
+
+;; exotica theme
+(use-package exotica-theme
+  :ensure t)
 
 ;; doom theme
 (use-package doom-themes :demand :ensure t)
+
 ;; Global settings (defaults)
 (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
       doom-themes-enable-italic t) ; if nil, italics is universally disabled
@@ -431,7 +446,7 @@
   :demand t)
 (add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
 
-(set-frame-parameter nil 'fullscreen 'fullboth)
+;;(set-frame-parameter nil 'fullscreen 'fullboth)
 
 ;; highlight bot replays
 (when (file-exists-p "~/.emacs.d/lisp/highlight-console-replays.el")
@@ -455,12 +470,13 @@
 (use-package poly-R
   :ensure
   :demand t)
-(add-to-list 'auto-mode-alist '("\\.md" . poly-r-mode))
+(add-to-list 'auto-mode-alist '("\\.rmd" . poly-r-mode))
 
 (use-package poly-markdown
   :ensure
   :demand t)
-(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown+R-mode))
 
 ;; Python
 (use-package pydoc
@@ -471,13 +487,136 @@
   :ensure
   :demand t)
 
-(with-eval-after-load "python"
-  (define-key python-mode-map (kbd "C-c C-d") 'helm-pydoc))
+(use-package pipenv
+  :hook (python-mode . pipenv-mode)
+  :init
+  (setq
+   pipenv-projectile-after-switch-function
+   #'pipenv-projectile-after-switch-extended))
+
+(use-package python-pytest
+  :ensure
+  :demand t)
+
+(use-package ein
+  :ensure
+  :demand t)
+
+;; (use-package pylint
+;;   :ensure
+;;   :demand t)
+;; (autoload 'pylint "pylint")
+;; (add-hook 'python-mode-hook 'pylint-add-menu-items)
+;; (add-hook 'python-mode-hook 'pylint-add-key-bindings)
+
+(global-set-key (kbd "C-c C-p t") #'python-test-popup)
+
+(setq pipenv-projectile-after-switch-function #'pipenv-projectile-after-switch-extended)
+
+;; (with-eval-after-load "python"
+;;   (define-key python-mode-map (kbd "C-c C-d") 'helm-pydoc))
 
 (setq python-shell-interpreter "/usr/local/bin/python3")
 
+;; direnv
+;; (use-package direnv
+;;   :ensure
+;;   :demand t)
+;; (direnv-mode)
+;; (setenv "LANG" "en_US.UTF-8")
+
+;; hy-lang
+(use-package hy-mode
+  :ensure
+  :demand t)
+(add-to-list 'auto-mode-alist '("\\.hy" . hy-mode))
+(add-hook 'hy-mode-hook 'pipenv-mode)
+
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
+
+;; pdfs
+(use-package pdf-tools
+  :ensure
+  :demand t)
+(pdf-loader-install)
+
+;; org mode export to pdf with code highlighting
+
+(require 'org)
+(require 'ox-latex)
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted)
+
+(add-to-list 'org-latex-packages-alist '("" "listingsutf8"))
+
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(setq org-src-fontify-natively t)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((R . t)
+   (python . t)
+   (latex . t)))
+
+;; kotlin mode
+
+(use-package kotlin-mode
+  :ensure
+  :demand t)
+(add-to-list 'auto-mode-alist '("\\.kt" . kotlin-mode))
+
+;; graphviz
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((dot . t)))
+
+(use-package graphviz-dot-mode
+  :ensure
+  :demand t)
+
+(add-to-list 'auto-mode-alist '("\\.dot" . graphviz-dot-mode))
+
+;; pdf tools
+
+(defvar selected-pages (list))
+
+(defun select-page ()
+  "Add current page to list of selected pages."
+  (interactive)
+  (add-to-list 'selected-pages (pdf-view-current-page) t))
+
+(defun extract-selected-pages (file)
+  "Save selected pages to FILE."
+  (interactive "FSave as: ")
+  (setq selected-pages (sort selected-pages #'<))
+  (start-process "pdfjam" "*pdfjam*"
+                 "pdfjam"
+                 (buffer-file-name)
+                 (mapconcat #'number-to-string
+                            selected-pages
+                            ",")
+                 "-o"
+                 (expand-file-name file))
+  (find-file (expand-file-name file))
+  (setq selected-pages (list)))
+
+(define-key pdf-view-mode-map "S" #'select-page)
+
+;; maxima
+
+(add-to-list 'load-path "/usr/local/Cellar/maxima/5.43.0/share/maxima/5.43.0/emacs")
+(autoload 'maxima-mode "maxima" "Maxima mode" t)
+(autoload 'imaxima "imaxima" "Frontend for maxima with Image support" t)
+(autoload 'maxima "maxima" "Maxima interaction" t)
+(autoload 'imath-mode "imath" "Imath mode for math formula input" t)
+(setq imaxima-use-maxima-mode-flag t)
+(add-to-list 'auto-mode-alist '("\\.ma[cx]" . maxima-mode))
 
 (provide '.emacs)
 ;;; .emacs ends here
