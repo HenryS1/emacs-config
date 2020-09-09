@@ -13,22 +13,20 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#282c34" "#ff6c6b" "#98be65" "#da8548" "#61afef" "#c678dd" "#1f5582" "#abb2bf"])
- '(custom-enabled-themes (quote (doom-vibrant)))
+ '(custom-enabled-themes '(doom-vibrant))
  '(custom-safe-themes
-   (quote
-    ("75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default)))
+   '("fa3bdd59ea708164e7821574822ab82a3c51e262d419df941f26d64d015c90ee" "0bff60fb779498e69ea705825a2ca1a5497a4fccef93bf3275705c2d27528f2f" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default))
  '(fci-rule-color "#4C566A")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
  '(haskell-process-suggest-remove-import-lines t)
- '(haskell-process-type (quote stack-ghci))
+ '(haskell-process-type 'stack-ghci)
  '(haskell-tags-on-save t)
  '(jdee-db-active-breakpoint-face-colors (cons "#191C25" "#80A0C2"))
  '(jdee-db-requested-breakpoint-face-colors (cons "#191C25" "#A2BF8A"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#191C25" "#434C5E"))
  '(package-selected-packages
-   (quote
-    (exotica-theme exotica ein w3 graphviz-dot-mode pdfgrep kotlin-mode pdf-tools hy-mode python-pytest pipenv proof-general helm-pydoc pydoc python-mode poly-R polymode poly-mode ess-smart-underscore org-ref ess evil ccls lsp-ui company-lsp lsp-mod doom-modeline js2-mode doom-themes realgud opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode rust-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu ensime exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode)))
+   '(poly-noweb poly-markdown lsp-metals coffee-mode go-mode rustic magit ido-completing-read+ ovpn-mode dante dap-mode posframe json-mode terraform-doc terraform-mode terraform prism prism-whitespace-mode slime-company haskell-mode edit-indirect ssh-agency keychain-environment yapfify lsp-mode flycheck-rust cargo toml-mode :leetcode elein exotica-theme exotica ein w3 graphviz-dot-mode pdfgrep kotlin-mode pdf-tools hy-mode python-pytest pipenv proof-general helm-pydoc pydoc python-mode poly-R polymode poly-mode ess-smart-underscore org-ref ess evil ccls lsp-ui company-lsp lsp-mod doom-modeline js2-mode doom-themes realgud opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))
  '(polymode-exporter-output-file-format "%sexported")
  '(vc-annotate-background "#3B4252")
  '(vc-annotate-color-map
@@ -67,7 +65,6 @@
                     ("melpa" . "http://melpa.org/packages/")
 ;;                    ("melpa-stable" . "http://stable.melpa.org/packages/")
                     ))
-
 
 (package-install 'use-package)
 
@@ -131,6 +128,8 @@
 (use-package flx :demand :ensure t)
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c p f") 'helm-projectile-find-file)
+(global-set-key (kbd "C-c p s g") 'helm-projectile-grep)
 (setq projectile-use-git-grep 1)
 (helm-mode 1)
 
@@ -141,6 +140,7 @@
 (use-package irony :demand :ensure t)
 (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++17")))
 (add-to-list 'auto-mode-alist '("\\.tpp$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
 ;; (use-package flycheck-irony :demand :ensure t)
 ;; (add-hook 'c++-mode-hook 'irony-mode)
 
@@ -166,9 +166,8 @@
 
 ;; slime
 (use-package slime :demand :ensure t)
-(setq inferior-lisp-program "/usr/local/bin/sbcl --no-debugger")
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
 (setq slime-contribs '(slime-fancy slime-asdf))
-
 
 ;; paredit
 (use-package paredit :demand :ensure t)
@@ -181,6 +180,10 @@
 (add-hook 'scheme-mode-hook           #'enable-paredit-mode)
 (add-hook 'clojure-mode-hook #'enable-paredit-mode)
 (add-hook 'hy-mode-hook #'enable-paredit-mode)
+(define-key paredit-mode-map (kbd "C-M-n") #'forward-list)
+(define-key paredit-mode-map (kbd "C-M-p") #'backward-list)
+(define-key paredit-mode-map (kbd "C-M-f") #'forward-sexp)
+(define-key paredit-mode-map (kbd "C-M-b") #'backward-sexp)
 
 ;; sml mode
 (use-package sml-mode
@@ -200,10 +203,6 @@
   :error-patterns ((error line-start (file-name) "(" line "): " (message) line-end))
   :modes (cuda-mode))
 
-;; exotica theme
-(use-package exotica-theme
-  :ensure t)
-
 ;; doom theme
 (use-package doom-themes :demand :ensure t)
 
@@ -213,9 +212,6 @@
 
 ;; Enable flashing mode-line on errors
 (doom-themes-visual-bell-config)
-
-;; Enable custom neotree theme
-(doom-themes-neotree-config)  ; all-the-icons fonts must be installed!
 
 (use-package doom-modeline
   :ensure t
@@ -301,7 +297,6 @@
 (add-hook 'eshell-preoutput-filter-functions 'ansi-color-apply)
 
 ;; scala
-(use-package ensime :ensure t)
 (use-package sbt-mode :ensure t)
 (use-package scala-mode :ensure t)
 
@@ -316,21 +311,55 @@
    'self-insert-command
    minibuffer-local-completion-map))
 
+(use-package lsp-mode
+  ;; Optional - enable lsp-mode automatically in scala files
+  :hook  (scala-mode . lsp)
+         (lsp-mode . lsp-lens-mode)
+  :config (setq lsp-prefer-flymake nil))
+
+;; Enable nice rendering of documentation on hover
+(use-package lsp-ui)
+
+;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
+;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
+;;   to avoid odd behavior with snippets and indentation
+(use-package yasnippet)
+
+;; Add company-lsp backend for metals
+(use-package company-lsp)
+
+;; Use the Debug Adapter Protocol for running tests and debugging
+(use-package posframe
+  ;; Posframe is a pop-up tool that must be manually installed for dap-mode
+  )
+(use-package dap-mode
+  :hook
+  (lsp-mode . dap-mode)
+  (lsp-mode . dap-ui-mode))
+
+(use-package lsp-metals
+  :ensure t
+  :demand t)
+
+;; Use the Tree View Protocol for viewing the project structure and triggering compilation
+(use-package lsp-treemacs
+  :config
+  (lsp-metals-treeview-enable t)
+  (setq lsp-metals-treeview-show-when-views-received t))
+
 ;; projectile
 (projectile-mode 1)
 
 ;; haskell
-(use-package intero
-  :ensure t
-  :demand)
-(add-hook 'haskell-mode-hook 'intero-mode)
+;; (use-package intero
+;;   :ensure t
+;;   :demand)
+;(add-hook 'haskell-mode-hook 'intero-mode)
 (use-package company-ghc :ensure t)
 
 ;; company mode
 (use-package company :ensure t)
-(defun hs-enable-company-mode ()
-  (company-mode 1))
-(add-hook 'prog-mode-hook #'hs-enable-company-mode)
+(add-hook 'prog-mode-hook (lambda () (company-mode 1)))
 (setq company-frontends '(company-preview-frontend))
 (setq company-idle-delay 0)
 
@@ -351,6 +380,10 @@
 
 ;; clojure
 (use-package cider
+  :ensure t
+  :demand t)
+
+(use-package elein
   :ensure t
   :demand t)
 
@@ -405,27 +438,16 @@
  'org-babel-load-languages
  '((lisp . t)))
 
+;; org-latex-shortcut
+(global-set-key (kbd "C-c M-l p") 'org-latex-preview)
+
 ;; htmlize
 (use-package htmlize
   :ensure
   :demand t)
 
-;; rust
-(use-package rust-mode
-  :ensure
-  :demand t)
-
 ;; git time machine
 (use-package git-timemachine
-  :ensure
-  :demand t)
-
-;; proof general
-;; Open .v files with Proof General's Coq mode
-(use-package proof-general
-  :ensure
-  :demand t)
-(use-package company-coq
   :ensure
   :demand t)
 
@@ -438,6 +460,12 @@
   (interactive)
   (message (format "%d" (- (region-end) (region-beginning)))))
 (global-set-key (kbd "C-c l") 'hs-region-length)
+
+;; coffeescript
+
+(use-package coffee-mode
+  :ensure
+  :demand t)
 
 ;; javascript
 (use-package js2-mode
@@ -486,6 +514,12 @@
   :ensure
   :demand t)
 
+(use-package yapfify
+  :ensure
+  :demand t)
+
+(add-hook 'python-mode-hook 'yapf-mode)
+
 (use-package pipenv
   :hook (python-mode . pipenv-mode)
   :init
@@ -500,6 +534,9 @@
 (use-package ein
   :ensure
   :demand t)
+
+(setq flycheck-python-flake8-executable "flake8")
+(setq flycheck-python-flake8-executable "python3")
 
 ;; (use-package pylint
 ;;   :ensure
@@ -539,6 +576,14 @@
   :ensure
   :demand t)
 (pdf-loader-install)
+
+;; prism
+(use-package prism
+  :ensure
+  :demand t)
+
+(add-hook 'python-mode-hook 'prism-whitespace-mode)
+(add-hook 'lisp-mode-hook 'prism-mode)
 
 ;; org mode export to pdf with code highlighting
 
@@ -632,6 +677,73 @@
   (setf selected-pages (list)))
 
 (define-key pdf-view-mode-map "S" #'select-page)
+
+;; lsp
+
+(use-package lsp-mode)
+
+(use-package lsp-ui)
+
+;; rust
+
+(use-package toml-mode)
+
+(use-package rustic)
+
+(setq lsp-rust-server 'rust-analyzer)
+(setq lsp-rust-analyzer-server-command '("~/.cargo/bin/rust-analyzer"))
+(setq rustic-lsp-client 'lsp-mode)
+
+;; Add keybindings for interacting with Cargo
+(use-package cargo
+  :hook (rustic . cargo-minor-mode))
+
+(use-package flycheck-rust
+  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+
+(push 'rustic-clippy flycheck-checkers)
+
+;; keychain management
+
+(use-package keychain-environment
+  :ensure
+  :demand t)
+(keychain-refresh-environment)
+
+;; ssh agent
+(use-package ssh-agency
+  :ensure
+  :demand t)
+
+;; terraform
+
+(use-package terraform-mode
+  :ensure
+  :demand t)
+
+(use-package terraform-doc
+  :ensure
+  :demand t)
+
+;; json-mode
+
+(use-package json-mode
+  :ensure
+  :demand t)
+
+;; open vpn
+
+(use-package ovpn-mode
+  :ensure
+  :demand t)
+
+;; go
+(use-package go-mode
+  :ensure
+  :demand t)
+
+;; gpg
+(setf epa-pinentry-mode 'loopback)
 
 ;; maxima
 
