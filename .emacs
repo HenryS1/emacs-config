@@ -743,7 +743,7 @@
   :demand t)
 
 ;; gpg
-(setf epa-pinentry-mode 'loopback)
+(setf epg-pinentry-mode 'loopback)
 
 ;; maxima
 
