@@ -13,9 +13,9 @@
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
    ["#282c34" "#ff6c6b" "#98be65" "#da8548" "#61afef" "#c678dd" "#1f5582" "#abb2bf"])
- '(custom-enabled-themes '(doom-vibrant))
+ '(custom-enabled-themes '(doom-moonlight))
  '(custom-safe-themes
-   '("fa3bdd59ea708164e7821574822ab82a3c51e262d419df941f26d64d015c90ee" "0bff60fb779498e69ea705825a2ca1a5497a4fccef93bf3275705c2d27528f2f" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default))
+   '("774aa2e67af37a26625f8b8c86f4557edb0bac5426ae061991a7a1a4b1c7e375" "4daff0f7fb02c7a4d5766a6a3e0931474e7c4fd7da58687899485837d6943b78" "fa3bdd59ea708164e7821574822ab82a3c51e262d419df941f26d64d015c90ee" "0bff60fb779498e69ea705825a2ca1a5497a4fccef93bf3275705c2d27528f2f" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default))
  '(fci-rule-color "#4C566A")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
@@ -26,7 +26,7 @@
  '(jdee-db-requested-breakpoint-face-colors (cons "#191C25" "#A2BF8A"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#191C25" "#434C5E"))
  '(package-selected-packages
-   '(poly-noweb poly-markdown lsp-metals coffee-mode go-mode rustic magit ido-completing-read+ ovpn-mode dante dap-mode posframe json-mode terraform-doc terraform-mode terraform prism prism-whitespace-mode slime-company haskell-mode edit-indirect ssh-agency keychain-environment yapfify lsp-mode flycheck-rust cargo toml-mode :leetcode elein exotica-theme exotica ein w3 graphviz-dot-mode pdfgrep kotlin-mode pdf-tools hy-mode python-pytest pipenv proof-general helm-pydoc pydoc python-mode poly-R polymode poly-mode ess-smart-underscore org-ref ess evil ccls lsp-ui company-lsp lsp-mod doom-modeline js2-mode doom-themes realgud opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))
+   '(groovy-mode gradle-mode poly-noweb poly-markdown coffee-mode go-mode rustic magit ido-completing-read+ ovpn-mode dante dap-mode posframe json-mode terraform-doc terraform-mode terraform prism prism-whitespace-mode slime-company haskell-mode edit-indirect ssh-agency keychain-environment yapfify flycheck-rust cargo toml-mode :leetcode elein exotica-theme exotica ein w3 graphviz-dot-mode pdfgrep kotlin-mode pdf-tools hy-mode python-pytest pipenv proof-general helm-pydoc pydoc python-mode poly-R polymode poly-mode ess-smart-underscore org-ref ess evil ccls doom-modeline js2-mode doom-themes realgud opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))
  '(polymode-exporter-output-file-format "%sexported")
  '(vc-annotate-background "#3B4252")
  '(vc-annotate-color-map
@@ -111,6 +111,24 @@
 ;; shell prompt issue
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+;; proof general for coq
+(use-package proof-general
+  :demand
+  :ensure t)
+
+;; (global-prettify-symbols-mode 0)
+;; (setq coq-symbols
+;;   '(("forall" ?∀)
+;;     ("->" ?→)
+;;     ("exists" ?∃)
+;;     ("=>" ?⇒)
+;;     ("False" ?⊥)
+;;     ("True" ?⊤)))
+
+;; (add-hook 'coq-mode-hook
+;;           (lambda ()
+;;             (setq prettify-symbols-alist coq-symbols)))
+
 ;; flycheck
 (use-package flycheck :demand :ensure t)
 (use-package flycheck-cask
@@ -131,9 +149,9 @@
 (global-set-key (kbd "C-c p f") 'helm-projectile-find-file)
 (global-set-key (kbd "C-c p s g") 'helm-projectile-grep)
 (setq projectile-use-git-grep 1)
-(helm-mode 1)
 
 (use-package helm-projectile :demand :ensure t)
+(helm-mode 1)
 (helm-projectile-on)
 
 ;; c++
@@ -166,6 +184,7 @@
 
 ;; slime
 (use-package slime :demand :ensure t)
+;; to increase heap size use "/usr/local/bin/sbcl --dynamic-space-size <mb size>"
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 (setq slime-contribs '(slime-fancy slime-asdf))
 
@@ -311,14 +330,14 @@
    'self-insert-command
    minibuffer-local-completion-map))
 
-(use-package lsp-mode
-  ;; Optional - enable lsp-mode automatically in scala files
-  :hook  (scala-mode . lsp)
-         (lsp-mode . lsp-lens-mode)
-  :config (setq lsp-prefer-flymake nil))
+;; (use-package lsp-mode
+;;   ;; Optional - enable lsp-mode automatically in scala files
+;;   :hook  (scala-mode . lsp)
+;;          (lsp-mode . lsp-lens-mode)
+;;   :config (setq lsp-prefer-flymake nil))
 
 ;; Enable nice rendering of documentation on hover
-(use-package lsp-ui)
+;; (use-package lsp-ui)
 
 ;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
 ;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
@@ -326,29 +345,30 @@
 (use-package yasnippet)
 
 ;; Add company-lsp backend for metals
-(use-package company-lsp)
+;; (use-package company-lsp)
 
 ;; Use the Debug Adapter Protocol for running tests and debugging
-(use-package posframe
-  ;; Posframe is a pop-up tool that must be manually installed for dap-mode
-  )
-(use-package dap-mode
-  :hook
-  (lsp-mode . dap-mode)
-  (lsp-mode . dap-ui-mode))
+;; (use-package posframe
+;;   ;; Posframe is a pop-up tool that must be manually installed for dap-mode
+;;   )
+;; (use-package dap-mode
+;;   :hook
+;;   (lsp-mode . dap-mode)
+;;   (lsp-mode . dap-ui-mode))
 
-(use-package lsp-metals
-  :ensure t
-  :demand t)
+;; (use-package lsp-metals
+;;   :ensure t
+;;   :demand t)
 
 ;; Use the Tree View Protocol for viewing the project structure and triggering compilation
-(use-package lsp-treemacs
-  :config
-  (lsp-metals-treeview-enable t)
-  (setq lsp-metals-treeview-show-when-views-received t))
+;; (use-package lsp-treemacs
+;;   :config
+;;   (lsp-metals-treeview-enable t)
+;;   (setq lsp-metals-treeview-show-when-views-received t))
 
 ;; projectile
 (projectile-mode 1)
+
 
 ;; haskell
 ;; (use-package intero
@@ -626,6 +646,40 @@
 
 (add-to-list 'auto-mode-alist '("\\.dot" . graphviz-dot-mode))
 
+;; Unfill
+;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+(defun unfill-paragraph (&optional region)
+  "Unfill REGION, otherwise paragraph at point.
+
+i.e. the reverse of fill paragraph."
+  (interactive (progn (barf-if-buffer-read-only) '(t)))
+  (let ((fill-column (point-max))
+        ;; This would override `fill-column' if it's an integer.
+        (emacs-lisp-docstring-fill-column t))
+    (fill-paragraph nil region)))
+
+;; Handy key definition
+(define-key global-map "\M-Q" 'unfill-paragraph)
+
+(defmacro quiescent-for-all-paragraphs (&rest body)
+  "Execute BODY with the point in each paragraph in the current buffer."
+  `(save-excursion
+     (goto-char (point-min))
+     (while (not (eq (point) (point-max)))
+       (ignore-errors
+         ,@body
+         (forward-paragraph)))))
+
+(defun quiescent-fill-all-paragraphs ()
+  "Run `fill-paragraph' on all paragraphs in the current document."
+  (interactive)
+  (quiescent-for-all-paragraphs (fill-paragraph)))
+
+(defun quiescent-unfill-all-paragraphs ()
+  "Run `unfill-paragraph' on all paragraphs in the current document."
+  (interactive)
+  (quiescent-for-all-paragraphs (unfill-paragraph)))
+
 ;; pdf tools
 
 (defvar selected-pages (list))
@@ -680,9 +734,9 @@
 
 ;; lsp
 
-(use-package lsp-mode)
+;;(use-package lsp-mode)
 
-(use-package lsp-ui)
+;;(use-package lsp-ui)
 
 ;; rust
 
@@ -702,6 +756,10 @@
   :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 (push 'rustic-clippy flycheck-checkers)
+
+;; gradle
+(use-package gradle-mode :ensure :demand)
+(use-package groovy-mode :ensure :demand)
 
 ;; keychain management
 
