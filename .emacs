@@ -236,7 +236,7 @@
   :ensure t
   :demand)
 
-(doom-modeline-init)
+(doom-modeline 1)
 
 ;; all the icons
 (use-package all-the-icons :demand :ensure t)
