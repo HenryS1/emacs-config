@@ -2,6 +2,7 @@
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
+(setq native-comp-async-report-warnings-errors 'silent)
 (package-initialize)
 
 (custom-set-variables
@@ -15,7 +16,7 @@
    ["#282c34" "#ff6c6b" "#98be65" "#da8548" "#61afef" "#c678dd" "#1f5582" "#abb2bf"])
  '(custom-enabled-themes '(doom-moonlight))
  '(custom-safe-themes
-   '("774aa2e67af37a26625f8b8c86f4557edb0bac5426ae061991a7a1a4b1c7e375" "4daff0f7fb02c7a4d5766a6a3e0931474e7c4fd7da58687899485837d6943b78" "fa3bdd59ea708164e7821574822ab82a3c51e262d419df941f26d64d015c90ee" "0bff60fb779498e69ea705825a2ca1a5497a4fccef93bf3275705c2d27528f2f" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default))
+   '("8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a" "774aa2e67af37a26625f8b8c86f4557edb0bac5426ae061991a7a1a4b1c7e375" "4daff0f7fb02c7a4d5766a6a3e0931474e7c4fd7da58687899485837d6943b78" "fa3bdd59ea708164e7821574822ab82a3c51e262d419df941f26d64d015c90ee" "0bff60fb779498e69ea705825a2ca1a5497a4fccef93bf3275705c2d27528f2f" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default))
  '(fci-rule-color "#4C566A")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
@@ -26,8 +27,9 @@
  '(jdee-db-requested-breakpoint-face-colors (cons "#191C25" "#A2BF8A"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#191C25" "#434C5E"))
  '(package-selected-packages
-   '(groovy-mode gradle-mode poly-noweb poly-markdown coffee-mode go-mode rustic magit ido-completing-read+ ovpn-mode dante dap-mode posframe json-mode terraform-doc terraform-mode terraform prism prism-whitespace-mode slime-company haskell-mode edit-indirect ssh-agency keychain-environment yapfify flycheck-rust cargo toml-mode :leetcode elein exotica-theme exotica ein w3 graphviz-dot-mode pdfgrep kotlin-mode pdf-tools hy-mode python-pytest pipenv proof-general helm-pydoc pydoc python-mode poly-R polymode poly-mode ess-smart-underscore org-ref ess evil ccls doom-modeline js2-mode doom-themes realgud opencl-mode flycheck-irony irony git-timemachine company-coq htmlize ox-reveal org-reveal sass-mode hamlet-mode intero eros nand2tetris-assembler nand2tetris yaml-mode sml-mode restclient rest-client cider flycheck-cask smartparens yatemplate popup-imenu exec-path-from-shell demo-it iedit company company-ghc scala-mode sbt-mode idris-mode zerodark-theme use-package slime paredit multiple-cursors ido-ubiquitous helm-projectile flx-ido cuda-mode))
+   '(fstar-mode maxima format-all wgrep-helm wgrep lua-mode protobuf-mode dockerfile-mode gdscript-mode pdf-tools python-mode haskell-mode typescript-mode proof-general go-mode json-mode terraform-doc terraform-mode ssh-agency keychain-environment groovy-mode gradle-mode flycheck-rust cargo rustic toml-mode graphviz-dot-mode prism hy-mode ein python-pytest pipenv yapfify helm-pydoc pydoc ess-smart-underscore ess js2-mode git-timemachine ox-reveal eros sass-mode yaml-mode restclient elein cider popup-imenu iedit company scala-mode sbt-mode smartparens magit all-the-icons doom-modeline doom-themes paredit slime multiple-cursors flx-ido ido-completing-read+ helm-projectile flx projectile helm exec-path-from-shell use-package))
  '(polymode-exporter-output-file-format "%sexported")
+ '(rustic-lsp-setup-p nil)
  '(vc-annotate-background "#3B4252")
  '(vc-annotate-color-map
    (list
@@ -72,7 +74,6 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-
 (require 'use-package)
 
 (use-package exec-path-from-shell
@@ -109,7 +110,14 @@
 (require 'cl)
 
 ;; shell prompt issue
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;; (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+
+;; protobuf
+(use-package protobuf-mode
+  :demand
+  :ensure t)
+
+(add-to-list 'auto-mode-alist '("\\.proto" . protobuf-mode))
 
 ;; proof general for coq
 (use-package proof-general
@@ -117,28 +125,27 @@
   :ensure t)
 
 ;; (global-prettify-symbols-mode 0)
-;; (setq coq-symbols
-;;   '(("forall" ?∀)
-;;     ("->" ?→)
-;;     ("exists" ?∃)
-;;     ("=>" ?⇒)
-;;     ("False" ?⊥)
-;;     ("True" ?⊤)))
+(setq coq-symbols
+      nil
+   ;; '(("forall" ?∀)
+   ;;  ("->" ?→)
+   ;;  ("exists" ?∃)
+   ;;  ("=>" ?⇒)
+   ;;  ("False" ?⊥)
+   ;;  ("True" ?⊤))
+   )
 
-;; (add-hook 'coq-mode-hook
-;;           (lambda ()
-;;             (setq prettify-symbols-alist coq-symbols)))
+(add-hook 'coq-mode-hook
+          (lambda ()
+            (setq prettify-symbols-alist coq-symbols)))
 
 ;; flycheck
-(use-package flycheck :demand :ensure t)
-(use-package flycheck-cask
-  :commands flycheck-cask-setup
-  :config (add-hook 'emacs-lisp-mode-hook (flycheck-cask-setup)))
-(add-to-list 'flycheck-clang-include-path "/usr/local/include/gtest/")
-(global-flycheck-mode)
-
-;; real gud
-(use-package realgud :demand :ensure t)
+;; (use-package flycheck :demand :ensure t)
+;; (use-package flycheck-cask
+;;   :commands flycheck-cask-setup
+;;   :config (add-hook 'emacs-lisp-mode-hook (flycheck-cask-setup)))
+;; (add-to-list 'flycheck-clang-include-path "/usr/local/include/gtest/")
+;; (global-flycheck-mode)
 
 ;; helm
 (use-package helm :demand :ensure t)
@@ -153,20 +160,6 @@
 (use-package helm-projectile :demand :ensure t)
 (helm-mode 1)
 (helm-projectile-on)
-
-;; c++
-(use-package irony :demand :ensure t)
-(add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++17")))
-(add-to-list 'auto-mode-alist '("\\.tpp$" . c++-mode))
-(add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
-;; (use-package flycheck-irony :demand :ensure t)
-;; (add-hook 'c++-mode-hook 'irony-mode)
-
-;; (setq irony-additional-clang-options '("-std=c++11"))
-
-;; opencl
-(use-package opencl-mode :demand :ensure t)
-(add-to-list 'auto-mode-alist '("\\.cl$" . opencl-mode))
 
 ;; ido
 (use-package ido :demand :ensure t)
@@ -185,7 +178,7 @@
 ;; slime
 (use-package slime :demand :ensure t)
 ;; to increase heap size use "/usr/local/bin/sbcl --dynamic-space-size <mb size>"
-(setq inferior-lisp-program "/usr/local/bin/sbcl")
+(setq inferior-lisp-program "sbcl --dynamic-space-size 2048")
 (setq slime-contribs '(slime-fancy slime-asdf))
 
 ;; paredit
@@ -204,23 +197,13 @@
 (define-key paredit-mode-map (kbd "C-M-f") #'forward-sexp)
 (define-key paredit-mode-map (kbd "C-M-b") #'backward-sexp)
 
-;; sml mode
-(use-package sml-mode
-  :demand
-  :ensure t)
-
 ;; disable bars
 (menu-bar-mode 1)
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
 
-;; cuda
-(use-package cuda-mode :demand :ensure t)
-(flycheck-define-checker cuda-mode-checker
-  "Checks cuda files based on nvcc compiler output"
-  :command ("make")
-  :error-patterns ((error line-start (file-name) "(" line "): " (message) line-end))
-  :modes (cuda-mode))
+;; dired
+(setq dired-dwim-target t)
 
 ;; doom theme
 (use-package doom-themes :demand :ensure t)
@@ -236,33 +219,53 @@
   :ensure t
   :demand)
 
-(doom-modeline 1)
+(doom-modeline-mode 1)
 
 ;; all the icons
 (use-package all-the-icons :demand :ensure t)
 
-;; hack font
+;; font
 (set-face-attribute 'default nil :font "hack")
+
+;; nano theme
+
 
 ;; magit
 (use-package magit
   :demand
   :ensure t)
 
-;; YASnippet
-(use-package yasnippet
-  :diminish yas-minor-mode
-  :commands yas-minor-mode
-  :config (yas-reload-all))
-
-(use-package yatemplate
-  :defer 2 ;; WORKAROUND https://github.com/mineo/yatemplate/issues/3
-  :config
-  (auto-insert-mode)
-  (setq auto-insert-alist nil)
-  (yatemplate-fill-alist))
-
 (defvar sp-interactive-dwim)
+
+;; kill-ring-deindent-mode
+(defun quiescent-yank-with-current-indentation ()
+  "Yank to point, inferring the correct level of indentation.
+
+Infer indentation by whether the point has whitespace to the start of
+the line before it.  e.g. this is usually the case when you're inside a
+switch statement."
+  (interactive)
+  (let ((start (point))
+        (starts-with-whitespace (rx (seq line-start (one-or-more blank))))
+        (text-up-to-point (save-excursion
+                            (buffer-substring (point)
+                                              (progn (beginning-of-line)
+                                                     (point))))))
+    (if (string-match starts-with-whitespace text-up-to-point)
+        (progn
+          (yank)
+          (save-excursion
+            (narrow-to-region start (point))
+            (goto-char start)
+            (while (and (/= (point) (progn
+                                      (ignore-errors
+                                        (end-of-line)
+                                        (forward-char))
+                                      (point)))
+                        (/= (point) (point-max)))
+              (insert text-up-to-point))
+            (widen)))
+      (yank))))
 
 ;;smart parens
 (use-package smartparens
@@ -297,12 +300,14 @@
 ;; (add-hook 'tuareg-mode-hook 'merlin-mode)
 ;; (add-hook 'caml-mode-hook 'merlin-mode)
 
-;; idris
-(use-package idris-mode :demand :ensure t)
-(setq idris-interpreter-path "/usr/local/bin/idris")
-(setq idris-semantic-source-highlighting t)
-(add-to-list 'completion-ignored-extensions ".ibc")
-(setq ido-ignore-extensions t)
+;; haskell
+(use-package haskell-mode :ensure t)
+
+;; godoscript
+(use-package gdscript-mode :ensure t)
+
+;; python
+(use-package python-mode :ensure t)
 
 ;; ansi colours
 (require 'ansi-color)
@@ -316,6 +321,12 @@
 (add-hook 'eshell-preoutput-filter-functions 'ansi-color-apply)
 
 ;; scala
+(use-package format-all :demand t :ensure t)
+(add-hook 'scala-mode-hook
+          (lambda ()
+            (setq format-all-formatters
+                  '(("Scala" (scalafmt))))))
+(add-hook 'prog-mode-hook 'format-all-mode)
 (use-package sbt-mode :ensure t)
 (use-package scala-mode :ensure t)
 
@@ -330,52 +341,8 @@
    'self-insert-command
    minibuffer-local-completion-map))
 
-;; (use-package lsp-mode
-;;   ;; Optional - enable lsp-mode automatically in scala files
-;;   :hook  (scala-mode . lsp)
-;;          (lsp-mode . lsp-lens-mode)
-;;   :config (setq lsp-prefer-flymake nil))
-
-;; Enable nice rendering of documentation on hover
-;; (use-package lsp-ui)
-
-;; lsp-mode supports snippets, but in order for them to work you need to use yasnippet
-;; If you don't want to use snippets set lsp-enable-snippet to nil in your lsp-mode settings
-;;   to avoid odd behavior with snippets and indentation
-(use-package yasnippet)
-
-;; Add company-lsp backend for metals
-;; (use-package company-lsp)
-
-;; Use the Debug Adapter Protocol for running tests and debugging
-;; (use-package posframe
-;;   ;; Posframe is a pop-up tool that must be manually installed for dap-mode
-;;   )
-;; (use-package dap-mode
-;;   :hook
-;;   (lsp-mode . dap-mode)
-;;   (lsp-mode . dap-ui-mode))
-
-;; (use-package lsp-metals
-;;   :ensure t
-;;   :demand t)
-
-;; Use the Tree View Protocol for viewing the project structure and triggering compilation
-;; (use-package lsp-treemacs
-;;   :config
-;;   (lsp-metals-treeview-enable t)
-;;   (setq lsp-metals-treeview-show-when-views-received t))
-
 ;; projectile
 (projectile-mode 1)
-
-
-;; haskell
-;; (use-package intero
-;;   :ensure t
-;;   :demand)
-;(add-hook 'haskell-mode-hook 'intero-mode)
-(use-package company-ghc :ensure t)
 
 ;; company mode
 (use-package company :ensure t)
@@ -385,11 +352,6 @@
 
 ;; i-edit
 (use-package iedit
-  :ensure t
-  :demand t)
-
-;; demo-it
-(use-package demo-it
   :ensure t
   :demand t)
 
@@ -422,16 +384,16 @@
   :ensure
   :demand t)
 
-;;nand2tetris
-(use-package nand2tetris
-  :ensure
-  :demand t)
+;; ;;nand2tetris
+;; (use-package nand2tetris
+;;   :ensure
+;;   :demand t)
 
-(use-package nand2tetris-assembler
-  :ensure
-  :demand t)
+;; (use-package nand2tetris-assembler
+;;   :ensure
+;;   :demand t)
 
-(add-to-list 'auto-mode-alist '("\\.hdl" . nand2tetris-mode))
+;; (add-to-list 'auto-mode-alist '("\\.hdl" . nand2tetris-mode))
 
 ;; prolog
 (add-to-list 'auto-mode-alist '("\\.prlg" . prolog-mode))
@@ -461,10 +423,10 @@
 ;; org-latex-shortcut
 (global-set-key (kbd "C-c M-l p") 'org-latex-preview)
 
-;; htmlize
-(use-package htmlize
-  :ensure
-  :demand t)
+;; ;; htmlize
+;; (use-package htmlize
+;;   :ensure
+;;   :demand t)
 
 ;; git time machine
 (use-package git-timemachine
@@ -480,12 +442,6 @@
   (interactive)
   (message (format "%d" (- (region-end) (region-beginning)))))
 (global-set-key (kbd "C-c l") 'hs-region-length)
-
-;; coffeescript
-
-(use-package coffee-mode
-  :ensure
-  :demand t)
 
 ;; javascript
 (use-package js2-mode
@@ -510,20 +466,32 @@
   :demand t)
 
 ;; Multiple major modes (used by R)
-(use-package polymode
+;; (use-package polymode
+;;   :ensure
+;;   :demand t)
+
+;; (use-package poly-R
+;;   :ensure
+;;   :demand t)
+;; (add-to-list 'auto-mode-alist '("\\.rmd" . poly-r-mode))
+
+;; (use-package poly-markdown
+;;   :ensure
+;;   :demand t)
+;; (add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown-mode))
+;; (add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown+R-mode))
+
+(use-package lua-mode
   :ensure
   :demand t)
 
-(use-package poly-R
-  :ensure
-  :demand t)
-(add-to-list 'auto-mode-alist '("\\.rmd" . poly-r-mode))
+(add-to-list 'auto-mode-alist '("\\.lua" . lua-mode))
 
-(use-package poly-markdown
+(use-package dockerfile-mode
   :ensure
   :demand t)
-(add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown+R-mode))
+
+(add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
 
 ;; Python
 (use-package pydoc
@@ -592,10 +560,10 @@
 (put 'upcase-region 'disabled nil)
 
 ;; pdfs
-(use-package pdf-tools
-  :ensure
-  :demand t)
-(pdf-loader-install)
+;; (use-package pdf-tools
+;;   :ensure
+;;   :demand t)
+;; (pdf-loader-install)
 
 ;; prism
 (use-package prism
@@ -626,13 +594,6 @@
  '((R . t)
    (python . t)
    (latex . t)))
-
-;; kotlin mode
-
-(use-package kotlin-mode
-  :ensure
-  :demand t)
-(add-to-list 'auto-mode-alist '("\\.kt" . kotlin-mode))
 
 ;; graphviz
 
@@ -682,71 +643,67 @@ i.e. the reverse of fill paragraph."
 
 ;; pdf tools
 
-(defvar selected-pages (list))
+;; (defvar selected-pages (list))
 
-(defun select-page ()
-  "Add current page to list of selected pages."
-  (interactive)
-  (add-to-list 'selected-pages (cons (buffer-file-name) (pdf-view-current-page)) t))
+;; (defun select-page ()
+;;   "Add current page to list of selected pages."
+;;   (interactive)
+;;   (add-to-list 'selected-pages (cons (buffer-file-name) (pdf-view-current-page)) t))
 
-(defun compare-pdf-pages (one other)
-  "ONE is less than OTHER if it's filename is lexicographically less than or it page is less."
-  (or (string< (car one) (car other))
-      (and (string= (car one) (car other))
-           (< (cdr one) (cdr other)))))
+;; (defun compare-pdf-pages (one other)
+;;   "ONE is less than OTHER if it's filename is lexicographically less than or it page is less."
+;;   (or (string< (car one) (car other))
+;;       (and (string= (car one) (car other))
+;;            (< (cdr one) (cdr other)))))
 
-(defun prepare-pdf-pages (pages)
-  "Groups PAGES by filename and orders them by page number."
-  (loop with sorted = (sort pages #'compare-pdf-pages)
-     with current-pages = nil
-     with current-file = nil
-     with result = (list)
-     for page in sorted
-     when (null current-file)
-     do (setf current-file (car page))
-     when (not (string= current-file (car page)))
-     do (push (cons current-file (reverse current-pages)) result)
-       (setf current-file (car page))
-       (setf current-pages nil)
-     do (push (cdr page) current-pages)
-     finally (progn (push (cons current-file (reverse current-pages)) result)
-                    (return result))))
+;; (defun prepare-pdf-pages (pages)
+;;   "Groups PAGES by filename and orders them by page number."
+;;   (loop with sorted = (sort pages #'compare-pdf-pages)
+;;      with current-pages = nil
+;;      with current-file = nil
+;;      with result = (list)
+;;      for page in sorted
+;;      when (null current-file)
+;;      do (setf current-file (car page))
+;;      when (not (string= current-file (car page)))
+;;      do (push (cons current-file (reverse current-pages)) result)
+;;        (setf current-file (car page))
+;;        (setf current-pages nil)
+;;      do (push (cdr page) current-pages)
+;;      finally (progn (push (cons current-file (reverse current-pages)) result)
+;;                     (return result))))
 
-(defun format-file-selection (file-selection)
-  "Formats FILE-SELECTION for pdfjam."
-  (list (car file-selection) (mapconcat #'number-to-string
-                                        (cdr file-selection)
-                                        ",")))
+;; (defun format-file-selection (file-selection)
+;;   "Formats FILE-SELECTION for pdfjam."
+;;   (list (car file-selection) (mapconcat #'number-to-string
+;;                                         (cdr file-selection)
+;;                                         ",")))
 
-(defun extract-selected-pages (file)
-  "Save selected pages to FILE."
-  (interactive "FSave as: ")
-  (setq selected-pages (sort selected-pages #'compare-pdf-pages))
-  (apply #'start-process "pdfjam" "*pdfjam*"
-                 "pdfjam"
-                 (append (apply #'append (mapcar #'format-file-selection
-                                  (prepare-pdf-pages selected-pages)))
-                         (list "-o"
-                               (expand-file-name file))))
-  (setf selected-pages (list)))
+;; (defun extract-selected-pages (file)
+;;   "Save selected pages to FILE."
+;;   (interactive "FSave as: ")
+;;   (setq selected-pages (sort selected-pages #'compare-pdf-pages))
+;;   (apply #'start-process "pdfjam" "*pdfjam*"
+;;                  "pdfjam"
+;;                  (append (apply #'append (mapcar #'format-file-selection
+;;                                   (prepare-pdf-pages selected-pages)))
+;;                          (list "-o"
+;;                                (expand-file-name file))))
+;;   (setf selected-pages (list)))
 
-(define-key pdf-view-mode-map "S" #'select-page)
+;; (define-key pdf-view-mode-map "S" #'select-page)
 
-;; lsp
+;; odin
 
-;;(use-package lsp-mode)
-
-;;(use-package lsp-ui)
+(load "~/.emacs.d/odin/odin-mode.el")
 
 ;; rust
 
 (use-package toml-mode)
 
 (use-package rustic)
-
-(setq lsp-rust-server 'rust-analyzer)
-(setq lsp-rust-analyzer-server-command '("~/.cargo/bin/rust-analyzer"))
-(setq rustic-lsp-client 'lsp-mode)
+(setq rustic-format-on-save t)
+(add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
 
 ;; Add keybindings for interacting with Cargo
 (use-package cargo
@@ -789,16 +746,27 @@ i.e. the reverse of fill paragraph."
   :ensure
   :demand t)
 
-;; open vpn
-
-(use-package ovpn-mode
-  :ensure
-  :demand t)
-
 ;; go
 (use-package go-mode
   :ensure
   :demand t)
+
+;; maxima
+(use-package maxima
+  :init
+  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)
+	  maxima-display-maxima-buffer nil)
+  (add-to-list 'auto-mode-alist
+		 (cons "\\.mac\\'" 'maxima-mode))
+  (add-to-list 'interpreter-mode-alist
+		 (cons "maxima" 'maxima-mode)))
+
+;; fstar
+(use-package fstar-mode
+  :ensure
+  :demand t
+  :init (add-to-list 'auto-mode-alist '("\\.fsi?\\'" . fstar-mode)))
+
 
 ;; gpg
 (setf epg-pinentry-mode 'loopback)
