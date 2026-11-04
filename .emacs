@@ -57,8 +57,8 @@
                    helm-projectile helm-pydoc hy-mode
                    ido-completing-read+ iedit js2-mode json-mode
                    keychain-environment lua-mode magit maxima
-                   multiple-cursors nasm nasm-mode ox-reveal paredit
-                   pdf-tools pipenv popup-imenu prism projectile
+                   multiple-cursors nasm-mode ox-reveal paredit
+                   pipenv popup-imenu prism projectile
                    proof-general protobuf-mode pydoc python-mode
                    python-pytest restclient rustic sass-mode sbt-mode
                    scala-mode slime smartparens ssh-agency swift-mode
@@ -88,11 +88,8 @@
 ;; the package manager
 (require 'package)
 (setq
- package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                    ("org" . "http://orgmode.org/elpa/")
-                    ("melpa" . "http://melpa.org/packages/")
-;;                    ("melpa-stable" . "http://stable.melpa.org/packages/")
-                    ))
+ package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                    ("melpa" . "https://melpa.org/packages/")))
 
 (package-install 'use-package)
 
@@ -136,22 +133,18 @@
 ;; global keybindings
 (global-unset-key (kbd "C-z"))
 
-;; shell prompt issue
-;; (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
 ;; protobuf
 (use-package protobuf-mode
   :demand
   :ensure t)
 
-(add-to-list 'auto-mode-alist '("\\.proto" . protobuf-mode))
+(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 
 ;; proof general for coq
 (use-package proof-general
   :demand
   :ensure t)
 
-;; (global-prettify-symbols-mode 0)
 (setq coq-symbols
       nil
    ;; '(("forall" ?∀)
@@ -165,14 +158,6 @@
 (add-hook 'coq-mode-hook
           (lambda ()
             (setq prettify-symbols-alist coq-symbols)))
-
-;; flycheck
-;; (use-package flycheck :demand :ensure t)
-;; (use-package flycheck-cask
-;;   :commands flycheck-cask-setup
-;;   :config (add-hook 'emacs-lisp-mode-hook (flycheck-cask-setup)))
-;; (add-to-list 'flycheck-clang-include-path "/usr/local/include/gtest/")
-;; (global-flycheck-mode)
 
 ;; helm
 (use-package helm :demand :ensure t)
@@ -238,7 +223,7 @@
 
 ;; shaders
 (use-package glsl-mode :demand :ensure t)
-(add-to-list 'auto-mode-alist '("\\.frag" . glsl-mode))
+(add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
 
 ;; doom theme
 (use-package doom-themes :demand :ensure t)
@@ -262,15 +247,10 @@
 ;; font
 (set-face-attribute 'default nil :font "hack")
 
-;; nano theme
-
-
 ;; magit
 (use-package magit
   :demand
   :ensure t)
-
-(defvar sp-interactive-dwim)
 
 ;; kill-ring-deindent-mode
 (defun quiescent-yank-with-current-indentation ()
@@ -302,39 +282,6 @@ switch statement."
             (widen)))
       (yank))))
 
-;;smart parens
-(use-package smartparens
-  :diminish smartparens-mode
-  :commands
-  smartparens-strict-mode
-  smartparens-mode
-  sp-restrict-to-pairs-interactive
-  sp-local-pair
-  :init
-  (setq sp-interactive-dwim t)
-  :config
-  (require 'smartparens-config)
-  (sp-use-smartparens-bindings)
-
-  (sp-pair "(" ")" :wrap "C-(") ;; how do people live without this?
-  (sp-pair "[" "]" :wrap "s-[") ;; C-[ sends ESC
-  (sp-pair "{" "}" :wrap "C-{")
-
-  ;; WORKAROUND https://github.com/Fuco1/smartparens/issues/543
-  (bind-key "C-<left>" nil smartparens-mode-map)
-  (bind-key "C-<right>" nil smartparens-mode-map)
-
-  (bind-key "s-<delete>" 'sp-kill-sexp smartparens-mode-map)
-  (bind-key "s-<backspace>" 'sp-backward-kill-sexp smartparens-mode-map))
-
-;; ;; ocaml
-;; ;;(use-package flycheck-ocaml :demand :ensure t)
-;; (setq opam-share (substring (shell-command-to-string "opam config var share 2> /dev/null") 0 -1))
-;; (add-to-list 'load-path (concat opam-share "/emacs/site-lisp"))
-;; (use-package merlin :demand :ensure t)
-;; (add-hook 'tuareg-mode-hook 'merlin-mode)
-;; (add-hook 'caml-mode-hook 'merlin-mode)
-
 ;; haskell
 (use-package haskell-mode :ensure t)
 
@@ -361,7 +308,12 @@ switch statement."
           (lambda ()
             (setq format-all-formatters
                   '(("Scala" (scalafmt))))))
-(add-hook 'prog-mode-hook 'format-all-mode)
+;; python is formatted by yapf and rust by rustic, so skip format-all there
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (unless (derived-mode-p 'python-mode 'python-base-mode
+                                    'rust-mode 'rustic-mode)
+              (format-all-mode 1))))
 (use-package sbt-mode
   :commands sbt-start sbt-command
   :config
@@ -403,8 +355,7 @@ switch statement."
 
 ;; magit
 (setq clojure-enable-paredit t)
-(global-set-key (kbd "C-x g") 'magit-status)
-(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+(global-set-key (kbd "C-x M-g") 'magit-dispatch)
 
 ;;rest client
 (use-package restclient
@@ -416,19 +367,8 @@ switch statement."
   :ensure
   :demand t)
 
-;; ;;nand2tetris
-;; (use-package nand2tetris
-;;   :ensure
-;;   :demand t)
-
-;; (use-package nand2tetris-assembler
-;;   :ensure
-;;   :demand t)
-
-;; (add-to-list 'auto-mode-alist '("\\.hdl" . nand2tetris-mode))
-
 ;; prolog
-(add-to-list 'auto-mode-alist '("\\.prlg" . prolog-mode))
+(add-to-list 'auto-mode-alist '("\\.prlg\\'" . prolog-mode))
 
 ;; sass mode
 (use-package sass-mode
@@ -451,11 +391,6 @@ switch statement."
 ;; org-latex-shortcut
 (global-set-key (kbd "C-c M-l p") 'org-latex-preview)
 
-;; ;; htmlize
-;; (use-package htmlize
-;;   :ensure
-;;   :demand t)
-
 ;; git time machine
 (use-package git-timemachine
   :ensure
@@ -475,9 +410,7 @@ switch statement."
 (use-package js2-mode
   :ensure
   :demand t)
-(add-to-list 'auto-mode-alist '("\\.js" . js2-mode))
-
-;;(set-frame-parameter nil 'fullscreen 'fullboth)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 ;; highlight bot replays
 (when (file-exists-p "~/.emacs.d/lisp/highlight-console-replays.el")
@@ -493,27 +426,11 @@ switch statement."
   :ensure
   :demand t)
 
-;; Multiple major modes (used by R)
-;; (use-package polymode
-;;   :ensure
-;;   :demand t)
-
-;; (use-package poly-R
-;;   :ensure
-;;   :demand t)
-;; (add-to-list 'auto-mode-alist '("\\.rmd" . poly-r-mode))
-
-;; (use-package poly-markdown
-;;   :ensure
-;;   :demand t)
-;; (add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown-mode))
-;; (add-to-list 'auto-mode-alist '("\\.rmd" . poly-markdown+R-mode))
-
 (use-package lua-mode
   :ensure
   :demand t)
 
-(add-to-list 'auto-mode-alist '("\\.lua" . lua-mode))
+(add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
 
 (use-package dockerfile-mode
   :ensure
@@ -553,42 +470,19 @@ switch statement."
 
 (setq flycheck-python-flake8-executable "flake8")
 
-;; (use-package pylint
-;;   :ensure
-;;   :demand t)
-;; (autoload 'pylint "pylint")
-;; (add-hook 'python-mode-hook 'pylint-add-menu-items)
-;; (add-hook 'python-mode-hook 'pylint-add-key-bindings)
+(global-set-key (kbd "C-c C-p t") #'python-pytest-dispatch)
 
-(global-set-key (kbd "C-c C-p t") #'python-test-popup)
-
-;; (with-eval-after-load "python"
-;;   (define-key python-mode-map (kbd "C-c C-d") 'helm-pydoc))
-
-(setq python-shell-interpreter "/usr/local/bin/python3")
-
-;; direnv
-;; (use-package direnv
-;;   :ensure
-;;   :demand t)
-;; (direnv-mode)
-;; (setenv "LANG" "en_US.UTF-8")
+(setq python-shell-interpreter "python3")
 
 ;; hy-lang
 (use-package hy-mode
   :ensure
   :demand t)
-(add-to-list 'auto-mode-alist '("\\.hy" . hy-mode))
+(add-to-list 'auto-mode-alist '("\\.hy\\'" . hy-mode))
 (add-hook 'hy-mode-hook 'pipenv-mode)
 
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
-
-;; pdfs
-;; (use-package pdf-tools
-;;   :ensure
-;;   :demand t)
-;; (pdf-loader-install)
 
 ;; prism
 (use-package prism
@@ -627,7 +521,7 @@ switch statement."
   :ensure
   :demand t)
 
-(add-to-list 'auto-mode-alist '("\\.dot" . graphviz-dot-mode))
+(add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
 
 ;; Unfill
 ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
@@ -663,61 +557,9 @@ i.e. the reverse of fill paragraph."
   (interactive)
   (quiescent-for-all-paragraphs (unfill-paragraph)))
 
-;; pdf tools
-
-;; (defvar selected-pages (list))
-
-;; (defun select-page ()
-;;   "Add current page to list of selected pages."
-;;   (interactive)
-;;   (add-to-list 'selected-pages (cons (buffer-file-name) (pdf-view-current-page)) t))
-
-;; (defun compare-pdf-pages (one other)
-;;   "ONE is less than OTHER if it's filename is lexicographically less than or it page is less."
-;;   (or (string< (car one) (car other))
-;;       (and (string= (car one) (car other))
-;;            (< (cdr one) (cdr other)))))
-
-;; (defun prepare-pdf-pages (pages)
-;;   "Groups PAGES by filename and orders them by page number."
-;;   (loop with sorted = (sort pages #'compare-pdf-pages)
-;;      with current-pages = nil
-;;      with current-file = nil
-;;      with result = (list)
-;;      for page in sorted
-;;      when (null current-file)
-;;      do (setf current-file (car page))
-;;      when (not (string= current-file (car page)))
-;;      do (push (cons current-file (reverse current-pages)) result)
-;;        (setf current-file (car page))
-;;        (setf current-pages nil)
-;;      do (push (cdr page) current-pages)
-;;      finally (progn (push (cons current-file (reverse current-pages)) result)
-;;                     (return result))))
-
-;; (defun format-file-selection (file-selection)
-;;   "Formats FILE-SELECTION for pdfjam."
-;;   (list (car file-selection) (mapconcat #'number-to-string
-;;                                         (cdr file-selection)
-;;                                         ",")))
-
-;; (defun extract-selected-pages (file)
-;;   "Save selected pages to FILE."
-;;   (interactive "FSave as: ")
-;;   (setq selected-pages (sort selected-pages #'compare-pdf-pages))
-;;   (apply #'start-process "pdfjam" "*pdfjam*"
-;;                  "pdfjam"
-;;                  (append (apply #'append (mapcar #'format-file-selection
-;;                                   (prepare-pdf-pages selected-pages)))
-;;                          (list "-o"
-;;                                (expand-file-name file))))
-;;   (setf selected-pages (list)))
-
-;; (define-key pdf-view-mode-map "S" #'select-page)
-
 ;; odin
 
-(load "~/.emacs.d/odin/odin-mode.el")
+(load "~/.emacs.d/odin/odin-mode.el" t)
 
 ;; rust
 
@@ -725,7 +567,6 @@ i.e. the reverse of fill paragraph."
 
 (use-package rustic)
 (setq rustic-format-on-save t)
-;(add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
 
 ;; Add keybindings for interacting with Cargo
 (use-package cargo
@@ -792,21 +633,11 @@ i.e. the reverse of fill paragraph."
 ;; nasm
 (use-package nasm-mode
   :ensure
-  :demand t 
-  :init (add-to-list 'auto-mode-alist '("\\.asm" . nasm-mode)))
+  :demand t
+  :init (add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode)))
 
 ;; gpg
 (setf epg-pinentry-mode 'loopback)
-
-;; ;; maxima
-
-;; (add-to-list 'load-path "/usr/local/Cellar/maxima/5.43.0/share/maxima/5.43.0/emacs")
-;; (autoload 'maxima-mode "maxima" "Maxima mode" t)
-;; (autoload 'imaxima "imaxima" "Frontend for maxima with Image support" t)
-;; (autoload 'maxima "maxima" "Maxima interaction" t)
-;; (autoload 'imath-mode "imath" "Imath mode for math formula input" t)
-;; (setq imaxima-use-maxima-mode-flag t)
-;; (add-to-list 'auto-mode-alist '("\\.ma[cx]" . maxima-mode))
 
 (provide '.emacs)
 ;;; .emacs ends here
