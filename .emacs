@@ -13,10 +13,31 @@
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
  '(ansi-color-names-vector
-   ["#282c34" "#ff6c6b" "#98be65" "#da8548" "#61afef" "#c678dd" "#1f5582" "#abb2bf"])
+   ["#282c34" "#ff6c6b" "#98be65" "#da8548" "#61afef" "#c678dd" "#1f5582"
+    "#abb2bf"])
  '(custom-enabled-themes '(doom-moonlight))
  '(custom-safe-themes
-   '("8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a" "774aa2e67af37a26625f8b8c86f4557edb0bac5426ae061991a7a1a4b1c7e375" "4daff0f7fb02c7a4d5766a6a3e0931474e7c4fd7da58687899485837d6943b78" "fa3bdd59ea708164e7821574822ab82a3c51e262d419df941f26d64d015c90ee" "0bff60fb779498e69ea705825a2ca1a5497a4fccef93bf3275705c2d27528f2f" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c" "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6" default))
+   '("8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
+     "774aa2e67af37a26625f8b8c86f4557edb0bac5426ae061991a7a1a4b1c7e375"
+     "4daff0f7fb02c7a4d5766a6a3e0931474e7c4fd7da58687899485837d6943b78"
+     "fa3bdd59ea708164e7821574822ab82a3c51e262d419df941f26d64d015c90ee"
+     "0bff60fb779498e69ea705825a2ca1a5497a4fccef93bf3275705c2d27528f2f"
+     "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a"
+     "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd"
+     "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605"
+     "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc"
+     "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370"
+     "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983"
+     "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652"
+     "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9"
+     "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379"
+     "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024"
+     "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45"
+     "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36"
+     "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402"
+     "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c"
+     "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6"
+     default))
  '(fci-rule-color "#4C566A")
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t)
@@ -27,30 +48,35 @@
  '(jdee-db-requested-breakpoint-face-colors (cons "#191C25" "#A2BF8A"))
  '(jdee-db-spec-breakpoint-face-colors (cons "#191C25" "#434C5E"))
  '(package-selected-packages
-   '(fstar-mode maxima format-all wgrep-helm wgrep lua-mode protobuf-mode dockerfile-mode gdscript-mode pdf-tools python-mode haskell-mode typescript-mode proof-general go-mode json-mode terraform-doc terraform-mode ssh-agency keychain-environment groovy-mode gradle-mode flycheck-rust cargo rustic toml-mode graphviz-dot-mode prism hy-mode ein python-pytest pipenv yapfify helm-pydoc pydoc ess-smart-underscore ess js2-mode git-timemachine ox-reveal eros sass-mode yaml-mode restclient elein cider popup-imenu iedit company scala-mode sbt-mode smartparens magit all-the-icons doom-modeline doom-themes paredit slime multiple-cursors flx-ido ido-completing-read+ helm-projectile flx projectile helm exec-path-from-shell use-package))
+   '(all-the-icons cargo cider company csv-mode dockerfile-mode
+                   doom-modeline doom-themes ein elein eros ess
+                   ess-smart-underscore exec-path-from-shell flx
+                   flx-ido flycheck-rust format-all fstar-mode
+                   gdscript-mode git-timemachine go-mode gradle-mode
+                   graphviz-dot-mode groovy-mode haskell-mode helm
+                   helm-projectile helm-pydoc hy-mode
+                   ido-completing-read+ iedit js2-mode json-mode
+                   keychain-environment lua-mode magit maxima
+                   multiple-cursors nasm nasm-mode ox-reveal paredit
+                   pdf-tools pipenv popup-imenu prism projectile
+                   proof-general protobuf-mode pydoc python-mode
+                   python-pytest restclient rustic sass-mode sbt-mode
+                   scala-mode slime smartparens ssh-agency swift-mode
+                   terraform-doc terraform-mode toml-mode
+                   typescript-mode use-package wgrep wgrep-helm
+                   yaml-mode yapfify))
  '(polymode-exporter-output-file-format "%sexported")
  '(rustic-lsp-setup-p nil)
  '(vc-annotate-background "#3B4252")
  '(vc-annotate-color-map
-   (list
-    (cons 20 "#A2BF8A")
-    (cons 40 "#bac389")
-    (cons 60 "#d3c788")
-    (cons 80 "#ECCC87")
-    (cons 100 "#e3b57e")
-    (cons 120 "#da9e75")
-    (cons 140 "#D2876D")
-    (cons 160 "#c88982")
-    (cons 180 "#be8b98")
-    (cons 200 "#B58DAE")
-    (cons 220 "#b97e97")
-    (cons 240 "#bd6f80")
-    (cons 260 "#C16069")
-    (cons 280 "#a15b66")
-    (cons 300 "#825663")
-    (cons 320 "#625160")
-    (cons 340 "#4C566A")
-    (cons 360 "#4C566A")))
+   (list (cons 20 "#A2BF8A") (cons 40 "#bac389") (cons 60 "#d3c788")
+         (cons 80 "#ECCC87") (cons 100 "#e3b57e") (cons 120 "#da9e75")
+         (cons 140 "#D2876D") (cons 160 "#c88982")
+         (cons 180 "#be8b98") (cons 200 "#B58DAE")
+         (cons 220 "#b97e97") (cons 240 "#bd6f80")
+         (cons 260 "#C16069") (cons 280 "#a15b66")
+         (cons 300 "#825663") (cons 320 "#625160")
+         (cons 340 "#4C566A") (cons 360 "#4C566A")))
  '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -75,6 +101,10 @@
   (package-refresh-contents))
 
 (require 'use-package)
+
+(use-package swift-mode
+  :ensure t
+  :mode "\\.swift\\'")
 
 (use-package exec-path-from-shell
   :demand t
@@ -105,9 +135,6 @@
 
 ;; global keybindings
 (global-unset-key (kbd "C-z"))
-
-;; cl mode is needed by various pacakges and needs to be required to avoid weird bugs
-(require 'cl)
 
 ;; shell prompt issue
 ;; (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -199,11 +226,19 @@
 
 ;; disable bars
 (menu-bar-mode 1)
-(tool-bar-mode -1)
+(tool-bar-mode 0)
 (toggle-scroll-bar -1)
 
 ;; dired
 (setq dired-dwim-target t)
+
+;; c++
+(use-package cmake-mode :demand :ensure t)
+(add-to-list 'auto-mode-alist '("CMakeLists.txt" . cmake-mode))
+
+;; shaders
+(use-package glsl-mode :demand :ensure t)
+(add-to-list 'auto-mode-alist '("\\.frag" . glsl-mode))
 
 ;; doom theme
 (use-package doom-themes :demand :ensure t)
@@ -327,10 +362,6 @@ switch statement."
             (setq format-all-formatters
                   '(("Scala" (scalafmt))))))
 (add-hook 'prog-mode-hook 'format-all-mode)
-(use-package sbt-mode :ensure t)
-(use-package scala-mode :ensure t)
-
-;; sbt
 (use-package sbt-mode
   :commands sbt-start sbt-command
   :config
@@ -340,6 +371,7 @@ switch statement."
    'minibuffer-complete-word
    'self-insert-command
    minibuffer-local-completion-map))
+(use-package scala-mode :ensure t)
 
 ;; projectile
 (projectile-mode 1)
@@ -415,10 +447,6 @@ switch statement."
   :demand t)
 (setq org-reveal-root "file:///Users/henrysteere/reveal.js/")
 (setq org-export-time-stamp-file nil)
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((lisp . t)))
 
 ;; org-latex-shortcut
 (global-set-key (kbd "C-c M-l p") 'org-latex-preview)
@@ -524,7 +552,6 @@ switch statement."
   :demand t)
 
 (setq flycheck-python-flake8-executable "flake8")
-(setq flycheck-python-flake8-executable "python3")
 
 ;; (use-package pylint
 ;;   :ensure
@@ -534,8 +561,6 @@ switch statement."
 ;; (add-hook 'python-mode-hook 'pylint-add-key-bindings)
 
 (global-set-key (kbd "C-c C-p t") #'python-test-popup)
-
-(setq pipenv-projectile-after-switch-function #'pipenv-projectile-after-switch-extended)
 
 ;; (with-eval-after-load "python"
 ;;   (define-key python-mode-map (kbd "C-c C-d") 'helm-pydoc))
@@ -593,14 +618,11 @@ switch statement."
  'org-babel-load-languages
  '((R . t)
    (python . t)
-   (latex . t)))
+   (latex . t)
+   (dot . t)
+   (lisp . t)))
 
 ;; graphviz
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((dot . t)))
-
 (use-package graphviz-dot-mode
   :ensure
   :demand t)
@@ -703,7 +725,7 @@ i.e. the reverse of fill paragraph."
 
 (use-package rustic)
 (setq rustic-format-on-save t)
-(add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
+;(add-hook 'rustic-mode-hook 'rk/rustic-mode-hook)
 
 ;; Add keybindings for interacting with Cargo
 (use-package cargo
@@ -757,7 +779,7 @@ i.e. the reverse of fill paragraph."
   (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)
 	  maxima-display-maxima-buffer nil)
   (add-to-list 'auto-mode-alist
-		 (cons "\\.mac\\'" 'maxima-mode))
+		 (cons "\\.ma[cx]\\'" 'maxima-mode))
   (add-to-list 'interpreter-mode-alist
 		 (cons "maxima" 'maxima-mode)))
 
@@ -767,19 +789,24 @@ i.e. the reverse of fill paragraph."
   :demand t
   :init (add-to-list 'auto-mode-alist '("\\.fsi?\\'" . fstar-mode)))
 
+;; nasm
+(use-package nasm-mode
+  :ensure
+  :demand t 
+  :init (add-to-list 'auto-mode-alist '("\\.asm" . nasm-mode)))
 
 ;; gpg
 (setf epg-pinentry-mode 'loopback)
 
-;; maxima
+;; ;; maxima
 
-(add-to-list 'load-path "/usr/local/Cellar/maxima/5.43.0/share/maxima/5.43.0/emacs")
-(autoload 'maxima-mode "maxima" "Maxima mode" t)
-(autoload 'imaxima "imaxima" "Frontend for maxima with Image support" t)
-(autoload 'maxima "maxima" "Maxima interaction" t)
-(autoload 'imath-mode "imath" "Imath mode for math formula input" t)
-(setq imaxima-use-maxima-mode-flag t)
-(add-to-list 'auto-mode-alist '("\\.ma[cx]" . maxima-mode))
+;; (add-to-list 'load-path "/usr/local/Cellar/maxima/5.43.0/share/maxima/5.43.0/emacs")
+;; (autoload 'maxima-mode "maxima" "Maxima mode" t)
+;; (autoload 'imaxima "imaxima" "Frontend for maxima with Image support" t)
+;; (autoload 'maxima "maxima" "Maxima interaction" t)
+;; (autoload 'imath-mode "imath" "Imath mode for math formula input" t)
+;; (setq imaxima-use-maxima-mode-flag t)
+;; (add-to-list 'auto-mode-alist '("\\.ma[cx]" . maxima-mode))
 
 (provide '.emacs)
 ;;; .emacs ends here
