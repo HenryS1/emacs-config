@@ -1,258 +1,180 @@
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
+;;; .emacs --- Personal Emacs configuration  -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;; Packages are managed with the built-in `use-package'.  Every package is
+;; installed on demand (`use-package-always-ensure') and loaded lazily
+;; (`use-package-always-defer'); anything that must load at startup says
+;; `:demand t'.
+
+;;; Code:
+
+;;;; Package management
+
 (setq native-comp-async-report-warnings-errors 'silent)
-(package-initialize)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default default default italic underline success warning error])
- '(ansi-color-names-vector
-   ["#282c34" "#ff6c6b" "#98be65" "#da8548" "#61afef" "#c678dd" "#1f5582"
-    "#abb2bf"])
- '(custom-enabled-themes '(doom-moonlight))
- '(custom-safe-themes
-   '("8d3ef5ff6273f2a552152c7febc40eabca26bae05bd12bc85062e2dc224cde9a"
-     "774aa2e67af37a26625f8b8c86f4557edb0bac5426ae061991a7a1a4b1c7e375"
-     "4daff0f7fb02c7a4d5766a6a3e0931474e7c4fd7da58687899485837d6943b78"
-     "fa3bdd59ea708164e7821574822ab82a3c51e262d419df941f26d64d015c90ee"
-     "0bff60fb779498e69ea705825a2ca1a5497a4fccef93bf3275705c2d27528f2f"
-     "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a"
-     "356e5cbe0874b444263f3e1f9fffd4ae4c82c1b07fe085ba26e2a6d332db34dd"
-     "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605"
-     "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc"
-     "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370"
-     "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983"
-     "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652"
-     "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9"
-     "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379"
-     "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024"
-     "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45"
-     "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36"
-     "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402"
-     "237e67159f3c218980764d3a5ffbd4676578ed6a0daf4e8d10d95f2bd73fb08c"
-     "dd58e14ea1b20d3948964e15b55040dc415605bbda2ba0521d8e1c65252decf6"
-     default))
- '(fci-rule-color "#4C566A")
- '(haskell-process-auto-import-loaded-modules t)
- '(haskell-process-log t)
- '(haskell-process-suggest-remove-import-lines t)
- '(haskell-process-type 'stack-ghci)
- '(haskell-tags-on-save t)
- '(jdee-db-active-breakpoint-face-colors (cons "#191C25" "#80A0C2"))
- '(jdee-db-requested-breakpoint-face-colors (cons "#191C25" "#A2BF8A"))
- '(jdee-db-spec-breakpoint-face-colors (cons "#191C25" "#434C5E"))
- '(package-selected-packages
-   '(all-the-icons cargo cider company csv-mode dockerfile-mode
-                   doom-modeline doom-themes ein elein eros ess
-                   ess-smart-underscore exec-path-from-shell flx
-                   flx-ido flycheck-rust format-all fstar-mode
-                   gdscript-mode git-timemachine go-mode gradle-mode
-                   graphviz-dot-mode groovy-mode haskell-mode helm
-                   helm-projectile helm-pydoc hy-mode
-                   ido-completing-read+ iedit js2-mode json-mode
-                   keychain-environment lua-mode magit maxima
-                   multiple-cursors nasm-mode ox-reveal paredit
-                   pipenv popup-imenu prism projectile
-                   proof-general protobuf-mode pydoc python-mode
-                   python-pytest restclient rustic sass-mode sbt-mode
-                   scala-mode slime smartparens ssh-agency swift-mode
-                   terraform-doc terraform-mode toml-mode
-                   typescript-mode use-package wgrep wgrep-helm
-                   yaml-mode yapfify))
- '(polymode-exporter-output-file-format "%sexported")
- '(rustic-lsp-setup-p nil)
- '(vc-annotate-background "#3B4252")
- '(vc-annotate-color-map
-   (list (cons 20 "#A2BF8A") (cons 40 "#bac389") (cons 60 "#d3c788")
-         (cons 80 "#ECCC87") (cons 100 "#e3b57e") (cons 120 "#da9e75")
-         (cons 140 "#D2876D") (cons 160 "#c88982")
-         (cons 180 "#be8b98") (cons 200 "#B58DAE")
-         (cons 220 "#b97e97") (cons 240 "#bd6f80")
-         (cons 260 "#C16069") (cons 280 "#a15b66")
-         (cons 300 "#825663") (cons 320 "#625160")
-         (cons 340 "#4C566A") (cons 360 "#4C566A")))
- '(vc-annotate-very-old-color nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-;; the package manager
 (require 'package)
-(setq
- package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                    ("melpa" . "https://melpa.org/packages/")))
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 
-(package-install 'use-package)
+;; Emacs normally initialises packages before loading this file.
+(unless (bound-and-true-p package--initialized)
+  (package-initialize))
 
-
-(when (not package-archive-contents)
+(unless package-archive-contents
   (package-refresh-contents))
 
 (require 'use-package)
+(setq use-package-always-ensure t
+      use-package-always-defer t)
 
-(use-package swift-mode
-  :ensure t
-  :mode "\\.swift\\'")
+;; Keep Custom's output out of this file.
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file t)
 
-(use-package exec-path-from-shell
-  :demand t
-  :ensure t)
+;;;; Core defaults
 
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
+(setq inhibit-startup-screen t
+      create-lockfiles nil
+      make-backup-files nil
+      scroll-error-top-bottom t
+      show-paren-delay 0.5
+      sentence-end-double-space nil
+      dired-dwim-target t
+      epg-pinentry-mode 'loopback)
 
+(setq-default indent-tabs-mode nil
+              tab-width 4
+              c-basic-offset 4)
 
-(setq
- inhibit-startup-screen t
- create-lockfiles nil
- make-backup-files nil
- column-number-mode t
- scroll-error-top-bottom t
- show-paren-delay 0.5
- use-package-always-ensure t
- sentence-end-double-space nil)
-
-;; buffer local variables
-(setq-default
- indent-tabs-mode nil
- tab-width 4
- c-basic-offset 4)
-
-;; modes
+(column-number-mode 1)
 (electric-indent-mode 0)
 
-;; global keybindings
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+
 (global-unset-key (kbd "C-z"))
+(global-set-key (kbd "C-c u") #'vc-git-grep)
 
-;; protobuf
-(use-package protobuf-mode
-  :demand
-  :ensure t)
+;; Colourise compilation output.
+(add-hook 'compilation-filter-hook #'ansi-color-compilation-filter)
 
-(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+;;;; Environment
 
-;; proof general for coq
-(use-package proof-general
-  :demand
-  :ensure t)
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns x))
+  :demand t
+  :config (exec-path-from-shell-initialize))
 
-(setq coq-symbols
-      nil
-   ;; '(("forall" ?∀)
-   ;;  ("->" ?→)
-   ;;  ("exists" ?∃)
-   ;;  ("=>" ?⇒)
-   ;;  ("False" ?⊥)
-   ;;  ("True" ?⊤))
-   )
+(use-package keychain-environment
+  :demand t
+  :config (keychain-refresh-environment))
 
-(add-hook 'coq-mode-hook
-          (lambda ()
-            (setq prettify-symbols-alist coq-symbols)))
+;;;; UI
 
-;; helm
-(use-package helm :demand :ensure t)
-(use-package projectile :demand :ensure t)
-(use-package flx :demand :ensure t)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-c p f") 'helm-projectile-find-file)
-(global-set-key (kbd "C-c p s g") 'helm-projectile-grep)
-(setq projectile-use-git-grep 1)
-
-(use-package helm-projectile :demand :ensure t)
-(helm-mode 1)
-(helm-projectile-on)
-
-;; ido
-(use-package ido :demand :ensure t)
-(use-package ido-completing-read+ :demand :ensure t)
-(use-package flx-ido :demand :ensure t)
-(ido-mode t)
-
-;;multiple cursors
-(use-package multiple-cursors :demand :ensure t)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
-
-;; slime
-(use-package slime :demand :ensure t)
-;; to increase heap size use "/usr/local/bin/sbcl --dynamic-space-size <mb size>"
-(setq inferior-lisp-program "sbcl --dynamic-space-size 2048")
-(setq slime-contribs '(slime-fancy slime-asdf))
-
-;; paredit
-(use-package paredit :demand :ensure t)
-(autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-(add-hook 'clojure-mode-hook #'enable-paredit-mode)
-(add-hook 'hy-mode-hook #'enable-paredit-mode)
-(define-key paredit-mode-map (kbd "C-M-n") #'forward-list)
-(define-key paredit-mode-map (kbd "C-M-p") #'backward-list)
-(define-key paredit-mode-map (kbd "C-M-f") #'forward-sexp)
-(define-key paredit-mode-map (kbd "C-M-b") #'backward-sexp)
-
-;; disable bars
-(menu-bar-mode 1)
+;; hide the menu bar, the tool bar and scroll bars
+(menu-bar-mode 0)
 (tool-bar-mode 0)
-(toggle-scroll-bar -1)
+(scroll-bar-mode -1)
 
-;; dired
-(setq dired-dwim-target t)
-
-;; c++
-(use-package cmake-mode :demand :ensure t)
-(add-to-list 'auto-mode-alist '("CMakeLists.txt" . cmake-mode))
-
-;; shaders
-(use-package glsl-mode :demand :ensure t)
-(add-to-list 'auto-mode-alist '("\\.frag\\'" . glsl-mode))
-
-;; doom theme
-(use-package doom-themes :demand :ensure t)
-
-;; Global settings (defaults)
-(setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-      doom-themes-enable-italic t) ; if nil, italics is universally disabled
-
-;; Enable flashing mode-line on errors
-(doom-themes-visual-bell-config)
-
-(use-package doom-modeline
-  :ensure t
-  :demand)
-
-(doom-modeline-mode 1)
-
-;; all the icons
-(use-package all-the-icons :demand :ensure t)
-
-;; font
 (set-face-attribute 'default nil :font "hack")
 
-;; magit
-(use-package magit
-  :demand
-  :ensure t)
+(use-package doom-themes
+  :demand t
+  :custom
+  (doom-themes-enable-bold t)
+  (doom-themes-enable-italic t)
+  :config
+  (load-theme 'doom-moonlight t)
+  ;; flash the mode-line on errors
+  (doom-themes-visual-bell-config))
 
-;; kill-ring-deindent-mode
+(use-package doom-modeline
+  :demand t
+  :config (doom-modeline-mode 1))
+
+(use-package all-the-icons)
+
+;;;; Completion and projects
+
+(use-package helm
+  :demand t
+  :bind (("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files))
+  :config (helm-mode 1))
+
+(use-package projectile
+  :demand t
+  :custom (projectile-use-git-grep t)
+  :config (projectile-mode 1))
+
+(use-package helm-projectile
+  :demand t
+  :bind (("C-c p f" . helm-projectile-find-file)
+         ("C-c p s g" . helm-projectile-grep))
+  :config (helm-projectile-on))
+
+(use-package company
+  :hook (prog-mode . company-mode)
+  :custom
+  (company-frontends '(company-preview-frontend))
+  (company-idle-delay 0))
+
+(use-package popup-imenu
+  :bind ("M-i" . popup-imenu))
+
+;;;; Editing
+
+(use-package multiple-cursors
+  :bind (("C-S-c C-S-c" . mc/edit-lines)
+         ("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C-<" . mc/mark-all-like-this)))
+
+;; iedit binds C-; when it loads, so it can't be deferred.
+(use-package iedit
+  :demand t)
+
+(use-package paredit
+  :hook ((emacs-lisp-mode
+          eval-expression-minibuffer-setup
+          ielm-mode
+          lisp-mode
+          lisp-interaction-mode
+          scheme-mode
+          clojure-mode
+          hy-mode) . enable-paredit-mode)
+  :bind (:map paredit-mode-map
+              ("C-M-n" . forward-list)
+              ("C-M-p" . backward-list)
+              ("C-M-f" . forward-sexp)
+              ("C-M-b" . backward-sexp)))
+
+(use-package eros
+  :demand t
+  :config (eros-mode 1))
+
+(use-package prism
+  :hook ((python-mode . prism-whitespace-mode)
+         (lisp-mode . prism-mode)))
+
+(use-package format-all)
+
+(defun hs-maybe-enable-format-all ()
+  "Enable `format-all-mode' except where a language-specific formatter runs.
+Python is formatted by yapf and Rust by rustic."
+  (unless (derived-mode-p 'python-mode 'python-base-mode
+                          'rust-mode 'rustic-mode)
+    (format-all-mode 1)))
+(add-hook 'prog-mode-hook #'hs-maybe-enable-format-all)
+
+;;;; Editing helpers
+
+(defun hs-region-length ()
+  "Find the length of the selected region."
+  (interactive)
+  (message "%d" (- (region-end) (region-beginning))))
+(global-set-key (kbd "C-c l") #'hs-region-length)
+
 (defun quiescent-yank-with-current-indentation ()
   "Yank to point, inferring the correct level of indentation.
 
@@ -282,249 +204,7 @@ switch statement."
             (widen)))
       (yank))))
 
-;; haskell
-(use-package haskell-mode :ensure t)
-
-;; godoscript
-(use-package gdscript-mode :ensure t)
-
-;; python
-(use-package python-mode :ensure t)
-
-;; ansi colours
-(require 'ansi-color)
-(defun colorize-compilation-buffer ()
-  (read-only-mode)
-  (ansi-color-apply-on-region (point-min) (point-max))
-  (read-only-mode))
-(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
-(add-hook 'eshell-preoutput-filter-functions 'ansi-color-apply)
-
-;; scala
-(use-package format-all :demand t :ensure t)
-(add-hook 'scala-mode-hook
-          (lambda ()
-            (setq format-all-formatters
-                  '(("Scala" (scalafmt))))))
-;; python is formatted by yapf and rust by rustic, so skip format-all there
-(add-hook 'prog-mode-hook
-          (lambda ()
-            (unless (derived-mode-p 'python-mode 'python-base-mode
-                                    'rust-mode 'rustic-mode)
-              (format-all-mode 1))))
-(use-package sbt-mode
-  :commands sbt-start sbt-command
-  :config
-  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
-  ;; allows using SPACE when in the minibuffer
-  (substitute-key-definition
-   'minibuffer-complete-word
-   'self-insert-command
-   minibuffer-local-completion-map))
-(use-package scala-mode :ensure t)
-
-;; projectile
-(projectile-mode 1)
-
-;; company mode
-(use-package company :ensure t)
-(add-hook 'prog-mode-hook (lambda () (company-mode 1)))
-(setq company-frontends '(company-preview-frontend))
-(setq company-idle-delay 0)
-
-;; i-edit
-(use-package iedit
-  :ensure t
-  :demand t)
-
-;; imenu
-(use-package popup-imenu
-  :commands popup-imenu
-  :bind ("M-i" . popup-imenu))
-
-;; clojure
-(use-package cider
-  :ensure t
-  :demand t)
-
-(use-package elein
-  :ensure t
-  :demand t)
-
-;; magit
-(setq clojure-enable-paredit t)
-(global-set-key (kbd "C-x M-g") 'magit-dispatch)
-
-;;rest client
-(use-package restclient
-  :ensure
-  :demand t)
-
-;; yaml
-(use-package yaml-mode
-  :ensure
-  :demand t)
-
-;; prolog
-(add-to-list 'auto-mode-alist '("\\.prlg\\'" . prolog-mode))
-
-;; sass mode
-(use-package sass-mode
-  :ensure
-  :demand t)
-
-;; eros evaluation overlays
-(use-package eros
-  :ensure
-  :demand t)
-(eros-mode 1)
-
-;; org-reveal
-(use-package ox-reveal
-  :ensure
-  :demand t)
-(setq org-reveal-root "file:///Users/henrysteere/reveal.js/")
-(setq org-export-time-stamp-file nil)
-
-;; org-latex-shortcut
-(global-set-key (kbd "C-c M-l p") 'org-latex-preview)
-
-;; git time machine
-(use-package git-timemachine
-  :ensure
-  :demand t)
-
-;; git grep shortcut
-(global-set-key (kbd "C-c u") 'vc-git-grep)
-
-;; some handy utilities
-(defun hs-region-length ()
-  "Find the length of the selected region."
-  (interactive)
-  (message (format "%d" (- (region-end) (region-beginning)))))
-(global-set-key (kbd "C-c l") 'hs-region-length)
-
-;; javascript
-(use-package js2-mode
-  :ensure
-  :demand t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-
-;; highlight bot replays
-(when (file-exists-p "~/.emacs.d/lisp/highlight-console-replays.el")
-  (load "~/.emacs.d/lisp/highlight-console-replays.el")
-  (require 'highlight-console-replays))
-
-;; R lang
-(use-package ess
-  :ensure
-  :demand t)
-
-(use-package ess-smart-underscore
-  :ensure
-  :demand t)
-
-(use-package lua-mode
-  :ensure
-  :demand t)
-
-(add-to-list 'auto-mode-alist '("\\.lua\\'" . lua-mode))
-
-(use-package dockerfile-mode
-  :ensure
-  :demand t)
-
-(add-to-list 'auto-mode-alist '("Dockerfile" . dockerfile-mode))
-
-;; Python
-(use-package pydoc
-  :ensure
-  :demand t)
-
-(use-package helm-pydoc
-  :ensure
-  :demand t)
-
-(use-package yapfify
-  :ensure
-  :demand t)
-
-(add-hook 'python-mode-hook 'yapf-mode)
-
-(use-package pipenv
-  :hook (python-mode . pipenv-mode)
-  :init
-  (setq
-   pipenv-projectile-after-switch-function
-   #'pipenv-projectile-after-switch-extended))
-
-(use-package python-pytest
-  :ensure
-  :demand t)
-
-(use-package ein
-  :ensure
-  :demand t)
-
-(setq flycheck-python-flake8-executable "flake8")
-
-(global-set-key (kbd "C-c C-p t") #'python-pytest-dispatch)
-
-(setq python-shell-interpreter "python3")
-
-;; hy-lang
-(use-package hy-mode
-  :ensure
-  :demand t)
-(add-to-list 'auto-mode-alist '("\\.hy\\'" . hy-mode))
-(add-hook 'hy-mode-hook 'pipenv-mode)
-
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
-;; prism
-(use-package prism
-  :ensure
-  :demand t)
-
-(add-hook 'python-mode-hook 'prism-whitespace-mode)
-(add-hook 'lisp-mode-hook 'prism-mode)
-
-;; org mode export to pdf with code highlighting
-
-(require 'org)
-(require 'ox-latex)
-(add-to-list 'org-latex-packages-alist '("" "minted"))
-(setq org-latex-listings 'minted)
-
-(add-to-list 'org-latex-packages-alist '("" "listingsutf8"))
-
-(setq org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-
-(setq org-src-fontify-natively t)
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((R . t)
-   (python . t)
-   (latex . t)
-   (dot . t)
-   (lisp . t)))
-
-;; graphviz
-(use-package graphviz-dot-mode
-  :ensure
-  :demand t)
-
-(add-to-list 'auto-mode-alist '("\\.dot\\'" . graphviz-dot-mode))
-
-;; Unfill
-;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+;; Stefan Monnier <foo at acm.org>.  It is the opposite of fill-paragraph.
 (defun unfill-paragraph (&optional region)
   "Unfill REGION, otherwise paragraph at point.
 
@@ -534,9 +214,7 @@ i.e. the reverse of fill paragraph."
         ;; This would override `fill-column' if it's an integer.
         (emacs-lisp-docstring-fill-column t))
     (fill-paragraph nil region)))
-
-;; Handy key definition
-(define-key global-map "\M-Q" 'unfill-paragraph)
+(global-set-key (kbd "M-Q") #'unfill-paragraph)
 
 (defmacro quiescent-for-all-paragraphs (&rest body)
   "Execute BODY with the point in each paragraph in the current buffer."
@@ -557,87 +235,205 @@ i.e. the reverse of fill paragraph."
   (interactive)
   (quiescent-for-all-paragraphs (unfill-paragraph)))
 
-;; odin
+;;;; Tools
 
+(use-package magit
+  ;; magit binds C-x g itself
+  :bind ("C-x M-g" . magit-dispatch))
+
+(use-package git-timemachine)
+
+(use-package restclient)
+
+;;;; Org
+
+(setq org-export-time-stamp-file nil
+      org-src-fontify-natively t
+      org-latex-src-block-backend 'minted
+      org-latex-pdf-process
+      (make-list 3 "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
+(with-eval-after-load 'org
+  (setq org-format-latex-options
+        (plist-put org-format-latex-options :scale 2.0))
+  (define-key org-mode-map (kbd "C-c M-l p") #'org-latex-preview)
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((R . t)
+     (python . t)
+     (latex . t)
+     (dot . t)
+     (lisp . t))))
+
+(with-eval-after-load 'ox-latex
+  (add-to-list 'org-latex-packages-alist '("" "minted")))
+
+(use-package ox-reveal
+  :after ox
+  :demand t
+  :custom (org-reveal-root "file:///Users/henrysteere/reveal.js/"))
+
+;;;; Languages
+
+;; C / C++
+(use-package cmake-mode)
+
+;; Clojure
+(use-package cider)
+
+;; Coq
+(use-package proof-general)
+
+;; Docker
+(use-package dockerfile-mode)
+
+;; F*
+(use-package fstar-mode
+  :mode "\\.fsi?\\'")
+
+;; Go
+(use-package go-mode)
+
+;; GDScript
+(use-package gdscript-mode)
+
+;; GLSL
+(use-package glsl-mode)
+
+;; Gradle / Groovy
+(use-package gradle-mode)
+(use-package groovy-mode)
+
+;; Graphviz
+(use-package graphviz-dot-mode)
+
+;; Haskell
+(use-package haskell-mode
+  :custom
+  (haskell-process-type 'stack-ghci)
+  (haskell-process-auto-import-loaded-modules t)
+  (haskell-process-log t)
+  (haskell-process-suggest-remove-import-lines t)
+  (haskell-tags-on-save t))
+
+;; Hy
+(use-package hy-mode)
+
+;; JavaScript
+(use-package js2-mode
+  :mode "\\.js\\'")
+
+;; JSON
+(use-package json-mode)
+
+;; Common Lisp
+(use-package slime
+  :custom
+  ;; to increase heap size use "sbcl --dynamic-space-size <mb size>"
+  (inferior-lisp-program "sbcl --dynamic-space-size 2048")
+  (slime-contribs '(slime-fancy slime-asdf)))
+
+;; Lua
+(use-package lua-mode)
+
+;; Maxima
+(use-package maxima
+  :mode ("\\.ma[cx]\\'" . maxima-mode)
+  :interpreter ("maxima" . maxima-mode)
+  :custom (maxima-display-maxima-buffer nil))
+
+;; NASM
+(use-package nasm-mode
+  :mode "\\.asm\\'")
+
+;; Odin (local)
 (load "~/.emacs.d/odin/odin-mode.el" t)
 
-;; rust
+;; Prolog
+(add-to-list 'auto-mode-alist '("\\.prlg\\'" . prolog-mode))
 
+;; Protobuf
+(use-package protobuf-mode)
+
+;; Python (uses the built-in python.el)
+(setq python-shell-interpreter "python3"
+      flycheck-python-flake8-executable "flake8")
+
+(use-package pydoc)
+(use-package helm-pydoc)
+
+(use-package yapfify
+  :hook (python-mode . yapf-mode))
+
+(use-package pipenv
+  :hook ((python-mode hy-mode) . pipenv-mode)
+  :init
+  (setq pipenv-projectile-after-switch-function
+        #'pipenv-projectile-after-switch-extended))
+
+(use-package python-pytest
+  ;; C-c C-p is `run-python' in python-mode, so a C-c C-p prefix is unreachable
+  :bind ("C-c t" . python-pytest-dispatch))
+
+(use-package ein)
+
+;; R
+(use-package ess)
+(use-package ess-smart-underscore
+  :after ess-r-mode
+  :demand t)
+
+;; Rust
 (use-package toml-mode)
 
-(use-package rustic)
-(setq rustic-format-on-save t)
+(use-package rustic
+  :custom
+  (rustic-format-on-save t)
+  (rustic-lsp-setup-p nil))
 
-;; Add keybindings for interacting with Cargo
 (use-package cargo
-  :hook (rustic . cargo-minor-mode))
+  :hook (rustic-mode . cargo-minor-mode))
 
 (use-package flycheck-rust
-  :config (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+  :hook (flycheck-mode . flycheck-rust-setup))
 
-(push 'rustic-clippy flycheck-checkers)
+(with-eval-after-load 'flycheck
+  (add-to-list 'flycheck-checkers 'rustic-clippy))
 
-;; gradle
-(use-package gradle-mode :ensure :demand)
-(use-package groovy-mode :ensure :demand)
+;; Sass
+(use-package sass-mode)
 
-;; keychain management
+;; Scala
+(use-package scala-mode
+  :hook (scala-mode . (lambda ()
+                        (setq-local format-all-formatters
+                                    '(("Scala" (scalafmt)))))))
 
-(use-package keychain-environment
-  :ensure
-  :demand t)
-(keychain-refresh-environment)
+(use-package sbt-mode
+  :commands sbt-start sbt-command
+  :config
+  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  ;; allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map))
 
-;; ssh agent
-(use-package ssh-agency
-  :ensure
-  :demand t)
+;; Swift
+(use-package swift-mode)
 
-;; terraform
+;; Terraform
+(use-package terraform-mode)
+(use-package terraform-doc)
 
-(use-package terraform-mode
-  :ensure
-  :demand t)
+;; YAML
+(use-package yaml-mode)
 
-(use-package terraform-doc
-  :ensure
-  :demand t)
+;;;; Local lisp
 
-;; json-mode
+(let ((replays "~/.emacs.d/lisp/highlight-console-replays.el"))
+  (when (file-exists-p replays)
+    (load replays)
+    (require 'highlight-console-replays)))
 
-(use-package json-mode
-  :ensure
-  :demand t)
-
-;; go
-(use-package go-mode
-  :ensure
-  :demand t)
-
-;; maxima
-(use-package maxima
-  :init
-  (setq org-format-latex-options (plist-put org-format-latex-options :scale 2.0)
-	  maxima-display-maxima-buffer nil)
-  (add-to-list 'auto-mode-alist
-		 (cons "\\.ma[cx]\\'" 'maxima-mode))
-  (add-to-list 'interpreter-mode-alist
-		 (cons "maxima" 'maxima-mode)))
-
-;; fstar
-(use-package fstar-mode
-  :ensure
-  :demand t
-  :init (add-to-list 'auto-mode-alist '("\\.fsi?\\'" . fstar-mode)))
-
-;; nasm
-(use-package nasm-mode
-  :ensure
-  :demand t
-  :init (add-to-list 'auto-mode-alist '("\\.asm\\'" . nasm-mode)))
-
-;; gpg
-(setf epg-pinentry-mode 'loopback)
-
-(provide '.emacs)
 ;;; .emacs ends here
