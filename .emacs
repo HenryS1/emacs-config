@@ -168,13 +168,6 @@ Python is formatted by yapf and Rust by rustic."
 (add-hook 'prog-mode-hook #'hs-maybe-enable-format-all)
 
 ;;;; Editing helpers
-
-(defun hs-region-length ()
-  "Find the length of the selected region."
-  (interactive)
-  (message "%d" (- (region-end) (region-beginning))))
-(global-set-key (kbd "C-c l") #'hs-region-length)
-
 (defun quiescent-yank-with-current-indentation ()
   "Yank to point, inferring the correct level of indentation.
 
@@ -203,6 +196,7 @@ switch statement."
               (insert text-up-to-point))
             (widen)))
       (yank))))
+(global-set-key (kbd "C-c C-w") #'quiescent-yank-with-current-indentation)
 
 ;; Stefan Monnier <foo at acm.org>.  It is the opposite of fill-paragraph.
 (defun unfill-paragraph (&optional region)
