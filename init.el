@@ -1,20 +1,18 @@
-;;; .emacs --- Personal Emacs configuration  -*- lexical-binding: t; -*-
+;;; init.el --- Personal Emacs configuration  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;; Packages are managed with the built-in `use-package'.  Every package is
 ;; installed on demand (`use-package-always-ensure') and loaded lazily
 ;; (`use-package-always-defer'); anything that must load at startup says
 ;; `:demand t'.
+;;
+;; Package archives, native-comp and frame UI settings live in early-init.el.
 
 ;;; Code:
 
 ;;;; Package management
 
-(setq native-comp-async-report-warnings-errors 'silent)
-
 (require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
 
 ;; Emacs normally initialises packages before loading this file.
 (unless (bound-and-true-p package--initialized)
@@ -70,11 +68,6 @@
   :config (keychain-refresh-environment))
 
 ;;;; UI
-
-;; hide the menu bar, the tool bar and scroll bars
-(menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode -1)
 
 (set-face-attribute 'default nil :font "hack")
 
@@ -430,4 +423,4 @@ i.e. the reverse of fill paragraph."
     (load replays)
     (require 'highlight-console-replays)))
 
-;;; .emacs ends here
+;;; init.el ends here
